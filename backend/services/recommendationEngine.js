@@ -1,101 +1,101 @@
+// backend/services/recommendationEngine.js
+
 const WhoopData = require('../models/WhoopData');
-const User = require('../models/User'); // Import the User model
+const User = require('../models/User');
 const Meal = require('../models/Meal');
 const {
-    analyzeHeartRate,
-    analyzeHRV,
-    analyzeStrainScore,
-    analyzeEnergyExpenditure,
-    analyzeRecoveryMetrics,
-    calculateCorrelationMatrix
+  analyzeHeartRate,
+  analyzeHRV,
+  analyzeStrainScore,
+  analyzeEnergyExpenditure,
+  analyzeRecoveryMetrics,
+  calculateCorrelationMatrix,
+  analyzeGlycemicImpact,
 } = require('./dataAnalysis');
-const { analyzeGlycemicImpact } = require('./dataAnalysis');
 
 const getRecommendations = async (userId) => {
-    try {
-        const user = await User.findByPk(userId); // Fetch the user
-        if (!user) throw new Error('User not found');
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) throw new Error('User not found');
 
-        const whoopData = await WhoopData.findOne({ userId });
-        const meals = await Meal.findAll({ where: { userId } });
+    const whoopData = await WhoopData.findOne({ userId });
+    const meals = await Meal.findAll({ where: { userId } });
 
-        if (!whoopData) {
-            console.error(`Whoop data not found for user ID: ${userId}`);
-            return { error: 'Whoop data not found' };
-        }
-
-        if (meals.length === 0) {
-            console.warn(`Meals not found for user ID: ${userId}`);
-            // Handle missing meals gracefully, e.g., provide default recommendations
-            return { warning: 'Meals not found', recommendations: [] };
-        }
-
-        const userPreferences = user.dietaryPreferences || {};
-
-        // Ensure cycles is an array
-        let cycles = whoopData.cycles;
-        console.log('Cycles:', cycles); // Add this line for debugging
-        if (!Array.isArray(cycles)) {
-            console.error(`Invalid data format for cycles: ${cycles}`);
-            throw new Error('Invalid data format: cycles should be an array');
-        }
-
-        const heartRateRecommendations = analyzeHeartRate(cycles, userPreferences);
-        const hrvRecommendations = analyzeHRV(whoopData.recoveries, userPreferences);
-        const strainRecommendations = analyzeStrainScore(cycles, userPreferences);
-        const energyRecommendations = analyzeEnergyExpenditure(cycles, userPreferences);
-        const recoveryRecommendations = analyzeRecoveryMetrics(whoopData.recoveries, userPreferences);
-        const glycemicImpact = analyzeGlycemicImpact(meals);
-
-        const data = {
-            heartRate: whoopData.cycles.map(cycle => cycle.score.average_heart_rate),
-            hrv: whoopData.recoveries.map(recovery => recovery.score.hrv_rmssd_milli),
-            strain: whoopData.cycles.map(cycle => cycle.score.strain),
-            energy: whoopData.cycles.map(cycle => cycle.score.kilojoule),
-            recovery: whoopData.recoveries.map(recovery => recovery.score.recovery_score)
-        };
-
-        const minLength = Math.min(...Object.values(data).map(arr => arr.length));
-        Object.keys(data).forEach(key => {
-            data[key] = data[key].slice(0, minLength);
-        });
-
-        const correlationMatrix = calculateCorrelationMatrix(data);
-
-        return {
-            heartRateRecommendations,
-            hrvRecommendations,
-            strainRecommendations,
-            energyRecommendations,
-            recoveryRecommendations,
-            glycemicImpact,
-            correlationMatrix
-        };
-    } catch (error) {
-        console.error('Error in getRecommendations:', error.message);
-        throw error;
+    if (!whoopData) {
+      console.error(`Whoop data not found for user ID: ${userId}`);
+      return { error: 'Whoop data not found' };
     }
+
+    if (meals.length === 0) {
+      console.warn(`Meals not found for user ID: ${userId}`);
+      return { warning: 'Meals not found', recommendations: [] };
+    }
+
+    const userPreferences = user.dietaryPreferences || {};
+
+    let cycles = whoopData.cycles;
+    console.log('Cycles:', cycles); // Debugging line
+    if (!Array.isArray(cycles)) {
+      console.error(`Invalid data format for cycles: ${cycles}`);
+      throw new Error('Invalid data format: cycles should be an array');
+    }
+
+    const heartRateRecommendations = await analyzeHeartRate(userId, cycles);
+    const hrvRecommendations = await analyzeHRV(userId, whoopData.recoveries);
+    const strainRecommendations = await analyzeStrainScore(userId, cycles);
+    const energyRecommendations = await analyzeEnergyExpenditure(userId, cycles);
+    const recoveryRecommendations = await analyzeRecoveryMetrics(userId, whoopData.recoveries);
+    const glycemicImpact = analyzeGlycemicImpact(meals);
+
+    const data = {
+      heartRate: whoopData.cycles.map(cycle => cycle.score.average_heart_rate),
+      hrv: whoopData.recoveries.map(recovery => recovery.score.hrv_rmssd_milli),
+      strain: whoopData.cycles.map(cycle => cycle.score.strain),
+      energy: whoopData.cycles.map(cycle => cycle.score.kilojoule),
+      recovery: whoopData.recoveries.map(recovery => recovery.score.recovery_score),
+    };
+
+    const minLength = Math.min(...Object.values(data).map(arr => arr.length));
+    Object.keys(data).forEach(key => {
+      data[key] = data[key].slice(0, minLength);
+    });
+
+    const correlationMatrix = calculateCorrelationMatrix(data);
+
+    return {
+      heartRateRecommendations,
+      hrvRecommendations,
+      strainRecommendations,
+      energyRecommendations,
+      recoveryRecommendations,
+      glycemicImpact,
+      correlationMatrix,
+    };
+  } catch (error) {
+    console.error('Error in getRecommendations:', error.message);
+    throw error;
+  }
 };
 
 async function deriveInsights() {
-    try {
-        const whoopData = await WhoopData.find(); // Changed from findAll() to find()
-        for (const data of whoopData) {
-            const userId = data.userId;
-            console.log(`Processing user ID: ${userId}`);
-            const user = await User.findByPk(userId);
-            if (!user) {
-                console.error(`User not found: ${userId}`);
-                continue;
-            }
-            await getRecommendations(userId);
-        }
-    } catch (error) {
-        console.error('Error in deriveInsights:', error);
+  try {
+    const whoopData = await WhoopData.find();
+    for (const data of whoopData) {
+      const userId = data.userId;
+      console.log(`Processing user ID: ${userId}`);
+      const user = await User.findByPk(userId);
+      if (!user) {
+        console.error(`User not found: ${userId}`);
+        continue;
+      }
+      await getRecommendations(userId);
     }
+  } catch (error) {
+    console.error('Error in deriveInsights:', error);
+  }
 }
 
 module.exports = {
-    getRecommendations,
-    deriveInsights,
+  getRecommendations,
+  deriveInsights,
 };

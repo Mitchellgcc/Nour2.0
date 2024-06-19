@@ -1,4 +1,5 @@
 // backend/models/Meal.js
+
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
@@ -17,13 +18,119 @@ const Meal = sequelize.define('Meal', {
     allowNull: true,
   },
   calories: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false,
+  },
+  protein: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  carbs: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  fat: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  micronutrients: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  vitamins: {
+    type: DataTypes.JSON, // Storing detailed vitamins
+    allowNull: true,
+  },
+  minerals: {
+    type: DataTypes.JSON, // Storing detailed minerals
+    allowNull: true,
+  },
+  glycemicIndex: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  glycemicLoad: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  waterContent: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  omega3: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  omega6: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  polyphenols: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  antioxidants: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  solubleFiber: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  insolubleFiber: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  sodium: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  cholesterol: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  fiber: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  sugar: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  aminoAcids: {
+    type: DataTypes.JSON, // Detailed amino acids profile
+    allowNull: true,
+  },
+  fattyAcids: {
+    type: DataTypes.JSON, // Detailed fatty acids profile
+    allowNull: true,
+  },
+  nutrientDensityScore: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  healthImpactScore: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  inflammationScore: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  oxidativeStressScore: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  microbiomeImpactScore: {
+    type: DataTypes.FLOAT,
+    allowNull: true,
   },
   userId: {
     type: DataTypes.UUID,
     allowNull: false,
   },
+}, {
+  timestamps: true,
 });
 
 module.exports = Meal;

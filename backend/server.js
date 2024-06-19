@@ -20,3 +20,5 @@ sequelize.sync().then(async () => {
 }).catch(err => {
   console.error('Error syncing Sequelize:', err);
 });
+
+module.exports = app; // Ensure app is exported for tests

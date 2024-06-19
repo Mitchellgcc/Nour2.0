@@ -1,0 +1,662 @@
+  console.log
+    Environment variables loaded:
+
+      at Object.log (app.js:20:9)
+
+  console.log
+    POSTGRESQL_URI: postgres://mitchellgcc:Charlie123@localhost:5432/nutrition_app
+
+      at Object.log (app.js:21:9)
+
+  console.log
+    MONGODB_URI: mongodb+srv://mitchellgcc:Charlie123@nourmvp.cj35pp0.mongodb.net/Nour2?retryWrites=true&w=majority&appName=NourMVP
+
+      at Object.log (app.js:22:9)
+
+  console.log
+    WHOOP_CLIENT_ID: 065e2139-7cf9-41d5-a39e-684c8d0764e8
+
+      at Object.log (app.js:23:9)
+
+  console.log
+    WHOOP_CLIENT_SECRET: b38acccd48d5dd6031f5ced87b6eac9a90725e84b5e6f4404b3e6db19d23c8f1
+
+      at Object.log (app.js:24:9)
+
+  console.log
+    WHOOP_REDIRECT_URI: http://localhost:5001/api/whoop/redirect
+
+      at Object.log (app.js:25:9)
+
+  console.log
+    WHOOP_API_BASE_URL: https://api.prod.whoop.com
+
+      at Object.log (app.js:26:9)
+
+(node:12771) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+  console.log
+    PostgreSQL connected
+
+      at log (app.js:34:17)
+
+  console.log
+    PostgreSQL connected
+
+      at log (app.js:45:15)
+
+  console.log
+    Connected to MongoDB
+
+      at log (utils/dbUtils.js:13:13)
+
+  console.log
+    Test setup completed.
+
+      at Object.log (tests/inventoryUploadController.test.js:33:13)
+
+  console.log
+    Testing successful inventory image upload.
+
+      at Object.log (tests/inventoryUploadController.test.js:47:17)
+
+(node:12771) [DEP0044] DeprecationWarning: The `util.isArray` API is deprecated. Please use `Array.isArray()` instead.
+  console.log
+    MongoDB connected
+
+      at NativeConnection.log (config/database.js:24:21)
+
+  console.log
+    MongoDB connected
+
+      at NativeConnection.log (config/database.js:24:21)
+
+  console.log
+    Authenticating request with header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRlYzM3Y2U1LTg0YjktNDk4OS1hNjBmLWFlOTAxZWIyN2VmZiIsImlhdCI6MTcxODc5OTkzOCwiZXhwIjoxNzE4ODAzNTM4fQ.K3rHha9_m-Cte_SJxBS_v6X-oFd_vALaMYpSrfptIGQ
+
+      at log (middlewares/authMiddleware.js:9:11)
+
+  console.log
+    Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRlYzM3Y2U1LTg0YjktNDk4OS1hNjBmLWFlOTAxZWIyN2VmZiIsImlhdCI6MTcxODc5OTkzOCwiZXhwIjoxNzE4ODAzNTM4fQ.K3rHha9_m-Cte_SJxBS_v6X-oFd_vALaMYpSrfptIGQ
+
+      at log (middlewares/authMiddleware.js:17:11)
+
+  console.log
+    Token valid, decoded payload: {
+      id: '4ec37ce5-84b9-4989-a60f-ae901eb27eff',
+      iat: 1718799938,
+      exp: 1718803538
+    }
+
+      at log (middlewares/authMiddleware.js:26:13)
+
+  console.log
+    User found: {
+      id: '4ec37ce5-84b9-4989-a60f-ae901eb27eff',
+      name: 'Test User',
+      email: 'mitchellgcc@gmail.com',
+      password: 'hashed_password',
+      whoopId: null,
+      whoopAccessToken: null,
+      whoopRefreshToken: null,
+      whoopTokenExpires: null,
+      sessionId: null,
+      dietaryPreferences: null,
+      feedback: null,
+      overallHealthScore: null,
+      healthTrend: null,
+      createdAt: 2024-06-19T06:23:58.378Z,
+      updatedAt: 2024-06-19T06:23:58.378Z
+    }
+
+      at log (middlewares/authMiddleware.js:38:13)
+
+  console.log
+    [2024-06-19T12:25:38.763Z] Starting inventory upload process.
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.772Z] Analyzing inventory image for user 4ec37ce5-84b9-4989-a60f-ae901eb27eff: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938766-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.773Z] Detecting image type for path: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938766-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.773Z] Generating prompt for image type: fridge
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.773Z] Encoding image to base64 from path: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938766-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.773Z] Sending image to GPT-4 for analysis.
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.774Z] Received response from GPT-4.
+
+      at log (utils/helpers.js:9:13)
+
+[0mPOST /api/inventory/upload [32m200[0m 161.229 ms - 1393[0m
+  console.log
+    Response status: 200
+
+      at Object.log (tests/inventoryUploadController.test.js:55:17)
+
+  console.log
+    Response body: {
+      message: 'Inventory image uploaded and analyzed successfully',
+      analysis: {
+        items: [ [Object], [Object] ],
+        categoriesSummary: { Dairy: 1, Protein: 1 },
+        errors: []
+      }
+    }
+
+      at Object.log (tests/inventoryUploadController.test.js:56:17)
+
+  console.log
+    Test for successful inventory image upload passed.
+
+      at Object.log (tests/inventoryUploadController.test.js:61:17)
+
+  console.log
+    Testing missing authorization header.
+
+      at Object.log (tests/inventoryUploadController.test.js:65:17)
+
+  console.log
+    Authenticating request with header: undefined
+
+      at log (middlewares/authMiddleware.js:9:11)
+
+  console.log
+    Authorization header missing
+
+      at log (middlewares/authMiddleware.js:12:13)
+
+[0mPOST /api/inventory/upload [33m401[0m 2.800 ms - 42[0m
+  console.log
+    Test for missing authorization header passed.
+
+      at Object.log (tests/inventoryUploadController.test.js:73:17)
+
+  console.log
+    Testing invalid token.
+
+      at Object.log (tests/inventoryUploadController.test.js:77:17)
+
+  console.log
+    Authenticating request with header: Bearer invalidToken
+
+      at log (middlewares/authMiddleware.js:9:11)
+
+  console.log
+    Extracted token: invalidToken
+
+      at log (middlewares/authMiddleware.js:17:11)
+
+  console.error
+    Error verifying token JsonWebTokenError {
+      name: 'JsonWebTokenError',
+      message: 'jwt malformed'
+    }
+
+      41 |     next();
+      42 |   } catch (error) {
+    > 43 |     console.error("Error verifying token", error);
+         |             ^
+      44 |     if (error.name === 'TokenExpiredError') {
+      45 |       try {
+      46 |         const newToken = await refreshWhoopToken(req.user.id);
+
+      at error (middlewares/authMiddleware.js:43:13)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at SessionStrategy.strategy.pass (node_modules/passport/lib/middleware/authenticate.js:355:9)
+      at SessionStrategy.Object.<anonymous>.SessionStrategy.authenticate (node_modules/passport/lib/strategies/session.js:126:10)
+      at attempt (node_modules/passport/lib/middleware/authenticate.js:378:16)
+      at authenticate (node_modules/passport/lib/middleware/authenticate.js:379:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at initialize (node_modules/passport/lib/middleware/initialize.js:98:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at session (node_modules/express-session/index.js:487:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at logger (node_modules/morgan/index.js:144:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cors (node_modules/cors/lib/index.js:188:7)
+      at node_modules/cors/lib/index.js:224:17
+      at originCallback (node_modules/cors/lib/index.js:214:15)
+      at node_modules/cors/lib/index.js:219:13
+      at optionsCallback (node_modules/cors/lib/index.js:199:9)
+      at corsMiddleware (node_modules/cors/lib/index.js:204:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:122:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+  console.error
+    Invalid token JsonWebTokenError {
+      name: 'JsonWebTokenError',
+      message: 'jwt malformed'
+    }
+
+      52 |       }
+      53 |     } else {
+    > 54 |       console.error("Invalid token", error);
+         |               ^
+      55 |       res.status(401).json({ message: 'Invalid token' });
+      56 |     }
+      57 |   }
+
+      at error (middlewares/authMiddleware.js:54:15)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at next (node_modules/express/lib/router/route.js:149:13)
+      at Route.dispatch (node_modules/express/lib/router/route.js:119:3)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at node_modules/express/lib/router/index.js:284:15
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at router (node_modules/express/lib/router/index.js:47:12)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at SessionStrategy.strategy.pass (node_modules/passport/lib/middleware/authenticate.js:355:9)
+      at SessionStrategy.Object.<anonymous>.SessionStrategy.authenticate (node_modules/passport/lib/strategies/session.js:126:10)
+      at attempt (node_modules/passport/lib/middleware/authenticate.js:378:16)
+      at authenticate (node_modules/passport/lib/middleware/authenticate.js:379:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at initialize (node_modules/passport/lib/middleware/initialize.js:98:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at session (node_modules/express-session/index.js:487:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at logger (node_modules/morgan/index.js:144:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at cors (node_modules/cors/lib/index.js:188:7)
+      at node_modules/cors/lib/index.js:224:17
+      at originCallback (node_modules/cors/lib/index.js:214:15)
+      at node_modules/cors/lib/index.js:219:13
+      at optionsCallback (node_modules/cors/lib/index.js:199:9)
+      at corsMiddleware (node_modules/cors/lib/index.js:204:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at jsonParser (node_modules/body-parser/lib/types/json.js:122:7)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at expressInit (node_modules/express/lib/middleware/init.js:40:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at query (node_modules/express/lib/middleware/query.js:45:5)
+      at Layer.handle [as handle_request] (node_modules/express/lib/router/layer.js:95:5)
+      at trim_prefix (node_modules/express/lib/router/index.js:328:13)
+      at node_modules/express/lib/router/index.js:286:9
+      at Function.process_params (node_modules/express/lib/router/index.js:346:12)
+      at next (node_modules/express/lib/router/index.js:280:10)
+      at Function.handle (node_modules/express/lib/router/index.js:175:3)
+      at Function.handle (node_modules/express/lib/application.js:181:10)
+      at Server.app (node_modules/express/lib/express.js:39:9)
+
+[0mPOST /api/inventory/upload [33m401[0m 9.021 ms - 27[0m
+  console.log
+    Test for invalid token passed.
+
+      at Object.log (tests/inventoryUploadController.test.js:86:17)
+
+  console.log
+    Testing error handling during image analysis.
+
+      at Object.log (tests/inventoryUploadController.test.js:90:17)
+
+  console.log
+    Authenticating request with header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRlYzM3Y2U1LTg0YjktNDk4OS1hNjBmLWFlOTAxZWIyN2VmZiIsImlhdCI6MTcxODc5OTkzOCwiZXhwIjoxNzE4ODAzNTM4fQ.K3rHha9_m-Cte_SJxBS_v6X-oFd_vALaMYpSrfptIGQ
+
+      at log (middlewares/authMiddleware.js:9:11)
+
+  console.log
+    Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRlYzM3Y2U1LTg0YjktNDk4OS1hNjBmLWFlOTAxZWIyN2VmZiIsImlhdCI6MTcxODc5OTkzOCwiZXhwIjoxNzE4ODAzNTM4fQ.K3rHha9_m-Cte_SJxBS_v6X-oFd_vALaMYpSrfptIGQ
+
+      at log (middlewares/authMiddleware.js:17:11)
+
+  console.log
+    Token valid, decoded payload: {
+      id: '4ec37ce5-84b9-4989-a60f-ae901eb27eff',
+      iat: 1718799938,
+      exp: 1718803538
+    }
+
+      at log (middlewares/authMiddleware.js:26:13)
+
+  console.log
+    User found: {
+      id: '4ec37ce5-84b9-4989-a60f-ae901eb27eff',
+      name: 'Test User',
+      email: 'mitchellgcc@gmail.com',
+      password: 'hashed_password',
+      whoopId: null,
+      whoopAccessToken: null,
+      whoopRefreshToken: null,
+      whoopTokenExpires: null,
+      sessionId: null,
+      dietaryPreferences: null,
+      feedback: null,
+      overallHealthScore: null,
+      healthTrend: null,
+      createdAt: 2024-06-19T06:23:58.378Z,
+      updatedAt: 2024-06-19T06:23:58.378Z
+    }
+
+      at log (middlewares/authMiddleware.js:38:13)
+
+  console.log
+    [2024-06-19T12:25:38.955Z] Starting inventory upload process.
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.958Z] Analyzing inventory image for user 4ec37ce5-84b9-4989-a60f-ae901eb27eff: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938956-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.959Z] Detecting image type for path: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938956-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.959Z] Generating prompt for image type: fridge
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.959Z] Encoding image to base64 from path: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938956-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.959Z] Sending image to GPT-4 for analysis.
+
+      at log (utils/helpers.js:9:13)
+
+  console.error
+    [2024-06-19T12:25:38.959Z] Error in analyzeImage for user null: Error analyzing image
+
+       8 |     } else {
+       9 |         // Something else caused the error
+    > 10 |         console.error(`[${new Date().toISOString()}] Error in ${context} for user ${userId}:`, error.message);
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at error (utils/handleAxiosError.js:10:17)
+      at handleAxiosError (controllers/inventoryUploadController.js:64:9)
+      at controllers/inventoryUploadController.js:141:46
+
+  console.error
+    [2024-06-19T12:25:38.960Z] Error processing inventory image: Error analyzing image
+
+      2 |
+      3 | const handleErrors = (res, error, message) => {
+    > 4 |     console.error(`[${new Date().toISOString()}] ${message}:`, error.message);
+        |             ^
+      5 |     res.status(500).json({ message, error: error.message });
+      6 | };
+      7 |
+
+      at error (utils/helpers.js:4:13)
+      at handleErrors (controllers/inventoryUploadController.js:168:20)
+
+[0mPOST /api/inventory/upload [31m500[0m 9.726 ms - 78[0m
+  console.log
+    Test for error handling during image analysis passed.
+
+      at Object.log (tests/inventoryUploadController.test.js:101:17)
+
+  console.log
+    Testing validation of analysis data.
+
+      at Object.log (tests/inventoryUploadController.test.js:105:17)
+
+  console.log
+    Authenticating request with header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRlYzM3Y2U1LTg0YjktNDk4OS1hNjBmLWFlOTAxZWIyN2VmZiIsImlhdCI6MTcxODc5OTkzOCwiZXhwIjoxNzE4ODAzNTM4fQ.K3rHha9_m-Cte_SJxBS_v6X-oFd_vALaMYpSrfptIGQ
+
+      at log (middlewares/authMiddleware.js:9:11)
+
+  console.log
+    Extracted token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRlYzM3Y2U1LTg0YjktNDk4OS1hNjBmLWFlOTAxZWIyN2VmZiIsImlhdCI6MTcxODc5OTkzOCwiZXhwIjoxNzE4ODAzNTM4fQ.K3rHha9_m-Cte_SJxBS_v6X-oFd_vALaMYpSrfptIGQ
+
+      at log (middlewares/authMiddleware.js:17:11)
+
+  console.log
+    Token valid, decoded payload: {
+      id: '4ec37ce5-84b9-4989-a60f-ae901eb27eff',
+      iat: 1718799938,
+      exp: 1718803538
+    }
+
+      at log (middlewares/authMiddleware.js:26:13)
+
+  console.log
+    User found: {
+      id: '4ec37ce5-84b9-4989-a60f-ae901eb27eff',
+      name: 'Test User',
+      email: 'mitchellgcc@gmail.com',
+      password: 'hashed_password',
+      whoopId: null,
+      whoopAccessToken: null,
+      whoopRefreshToken: null,
+      whoopTokenExpires: null,
+      sessionId: null,
+      dietaryPreferences: null,
+      feedback: null,
+      overallHealthScore: null,
+      healthTrend: null,
+      createdAt: 2024-06-19T06:23:58.378Z,
+      updatedAt: 2024-06-19T06:23:58.378Z
+    }
+
+      at log (middlewares/authMiddleware.js:38:13)
+
+  console.log
+    [2024-06-19T12:25:38.970Z] Starting inventory upload process.
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.973Z] Analyzing inventory image for user 4ec37ce5-84b9-4989-a60f-ae901eb27eff: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938970-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.974Z] Detecting image type for path: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938970-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.974Z] Generating prompt for image type: fridge
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.974Z] Encoding image to base64 from path: /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/uploads/inventory/1718799938970-full-fridge-3302264.jpg
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.974Z] Sending image to GPT-4 for analysis.
+
+      at log (utils/helpers.js:9:13)
+
+  console.log
+    [2024-06-19T12:25:38.974Z] Received response from GPT-4.
+
+      at log (utils/helpers.js:9:13)
+
+[0mPOST /api/inventory/upload [32m200[0m 54.940 ms - 1393[0m
+  console.log
+    MongoDB connection closed
+
+      at log (utils/dbUtils.js:22:13)
+
+  console.log
+    Test teardown completed.
+
+      at Object.log (tests/inventoryUploadController.test.js:41:13)
+
+FAIL tests/inventoryUploadController.test.js
+  Inventory Upload Controller
+    ✓ should upload and analyze the inventory image successfully (189 ms)
+    ✓ should return 401 for missing authorization header (11 ms)
+    ✓ should return 401 for invalid token (17 ms)
+    ✓ should handle error during image analysis (16 ms)
+    ✕ should validate analysis data and return error for invalid data (60 ms)
+
+  ● Inventory Upload Controller › should validate analysis data and return error for invalid data
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 200
+
+      112 |             .attach('inventoryImage', filePath);
+      113 |
+    > 114 |         expect(response.status).toBe(400); // Expecting 400 for invalid data
+          |                                 ^
+      115 |         expect(response.body).toHaveProperty('message', 'Invalid structured analysis result');
+      116 |         console.log('Test for validation of analysis data passed.');
+      117 |     });
+
+      at Object.toBe (tests/inventoryUploadController.test.js:114:33)
+
+-------------------------------|---------|----------|---------|---------|-----------------------------------------------
+File                           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s                             
+-------------------------------|---------|----------|---------|---------|-----------------------------------------------
+All files                      |   36.08 |    11.74 |   23.58 |    36.2 |                                               
+ backend                       |   73.97 |        0 |      20 |   73.97 |                                               
+  app.js                       |   73.97 |        0 |      20 |   73.97 | 37-38,48-49,77-80,85,89-90,97-108             
+ backend/config                |   50.87 |        0 |      30 |   50.87 |                                               
+  database.js                  |   82.35 |      100 |      60 |   82.35 | 29-30,36                                      
+  passport.js                  |    37.5 |        0 |       0 |    37.5 | 19-38,45,49-53,58-62,72-80                    
+ backend/controllers           |   26.89 |    10.05 |   20.45 |   27.09 |                                               
+  authController.js            |   19.56 |        0 |       0 |   19.56 | 8-10,15-22,28-56,62-81,87                     
+  inventoryUploadController.js |   80.55 |    51.61 |     100 |   81.69 | 13,61,105-108,116-119,127,134,144,157-158     
+  mealController.js            |   11.11 |        0 |       0 |   11.11 | 6-7,12-16,22-34,40-98,104-166,172-185,191-247 
+  mealUploadController.js      |   16.66 |     3.57 |       0 |   16.88 | 11-12,17,21-22,27-277                         
+  profileController.js         |   14.81 |        0 |       0 |   14.81 | 4-18,25-35,41-51                              
+  userController.js            |   33.33 |        0 |       0 |   33.33 | 6-13                                          
+  whoopController.js           |   14.58 |        0 |       0 |   14.73 | 18-28,33-98,103,107-114,120-124,128-178       
+ backend/middlewares           |   69.23 |    66.66 |     100 |   69.23 |                                               
+  authMiddleware.js            |   69.23 |    66.66 |     100 |   69.23 | 20-21,29-30,35-36,45-51                       
+ backend/models                |     100 |      100 |     100 |     100 |                                               
+  Meal.js                      |     100 |      100 |     100 |     100 |                                               
+  User.js                      |     100 |      100 |     100 |     100 |                                               
+  WhoopData.js                 |     100 |      100 |     100 |     100 |                                               
+ backend/routes                |   87.27 |        0 |       0 |   87.27 |                                               
+  authRoutes.js                |     100 |      100 |     100 |     100 |                                               
+  inventoryRoutes.js           |     100 |      100 |     100 |     100 |                                               
+  mealRoutes.js                |     100 |      100 |     100 |     100 |                                               
+  profileRoutes.js             |   72.72 |      100 |       0 |   72.72 | 9,13,17                                       
+  userRoutes.js                |     100 |      100 |     100 |     100 |                                               
+  whoopRoutes.js               |   69.23 |        0 |       0 |   69.23 | 11-14,20                                      
+ backend/services              |   11.87 |        0 |       0 |   11.94 |                                               
+  scoringService.js            |   14.28 |        0 |       0 |   14.28 | 4-13,17-26,30-60,64-92,96-110,114-128,133-148 
+  whoopService.js              |    10.3 |        0 |       0 |   10.41 | 6-46,51-78,83-103,108-128,133-153,158-178     
+ backend/utils                 |   29.45 |    16.49 |   55.55 |   29.13 |                                               
+  dataNormalization.js         |    4.16 |        0 |       0 |    4.34 | 5-42                                          
+  dbUtils.js                   |     100 |       75 |     100 |     100 | 19                                            
+  handleAxiosError.js          |   71.42 |       50 |     100 |   71.42 | 4,7                                           
+  helpers.js                   |   70.37 |    73.33 |     100 |   69.23 | 19-20,30-31,35-36,39-40                       
+  validationUtils.js           |    1.69 |        0 |       0 |    1.69 | 4-133                                         
+-------------------------------|---------|----------|---------|---------|-----------------------------------------------
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 4 passed, 5 total
+Snapshots:   0 total
+Time:        1.635 s, estimated 2 s
+Ran all test suites.

@@ -1,6 +1,8 @@
+// backend/middlewares/authMiddleware.js
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { refreshWhoopToken } = require('../services/whoopService');
+const { v4: isUuid } = require('uuid');
 
 const authMiddleware = async (req, res, next) => {
   const authHeader = req.header('Authorization');
@@ -21,13 +23,20 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Token valid, decoded user:", decoded);
+    console.log("Token valid, decoded payload:", decoded);
+
+    if (!decoded.id || !isUuid(decoded.id)) {
+      console.log("Decoded token is missing user ID or ID is not valid UUID");
+      return res.status(401).json({ message: 'User ID is missing or not valid.' });
+    }
 
     const user = await User.findByPk(decoded.id);
     if (!user) {
-      console.log("User not found");
+      console.log("User not found for ID:", decoded.id);
       return res.status(404).json({ message: 'User not found' });
     }
+    console.log("User found:", user.dataValues);
+
     req.user = user;
     next();
   } catch (error) {
@@ -39,7 +48,7 @@ const authMiddleware = async (req, res, next) => {
         next();
       } catch (refreshError) {
         console.error("Error refreshing token", refreshError);
-        return res.status(401).json({ message: 'Authentication failed' });
+        return res.status(401).json({ message: 'Authentication failed. Token refresh failed.' });
       }
     } else {
       console.error("Invalid token", error);

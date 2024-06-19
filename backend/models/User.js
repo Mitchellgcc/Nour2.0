@@ -1,3 +1,5 @@
+// backend/models/User.js
+
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
@@ -46,6 +48,14 @@ const User = sequelize.define('User', {
     },
     feedback: {
         type: DataTypes.JSON,
+        allowNull: true,
+    },
+    overallHealthScore: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+    },
+    healthTrend: {
+        type: DataTypes.STRING,
         allowNull: true,
     },
 }, {

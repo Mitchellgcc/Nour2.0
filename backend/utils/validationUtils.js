@@ -126,4 +126,12 @@ function parseAndConvertAnalysisResult(analysisResult) {
   return analysisResult;
 }
 
-module.exports = { isValidAnalysisResult, parseAndConvertAnalysisResult };
+function validateInput(data) {
+  if (typeof data !== 'object' || data === null) {
+    return false;
+  }
+  return true; // Placeholder logic
+}
+
+
+module.exports = { isValidAnalysisResult, parseAndConvertAnalysisResult, validateInput };

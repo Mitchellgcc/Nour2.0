@@ -2,21 +2,21 @@
 
 const EnhancedData = require('../models/EnhancedData');
 const logger = require('../config/logger');
+const scoringService = require('./scoringService'); // Import scoring service
 
 // Enhanced Analyze Heart Rate
 const analyzeHeartRate = async (userId, cycles) => {
-    console.log('Cycles:', cycles); // Add this line
+    console.log('Cycles:', cycles); // Debugging line
     if (!Array.isArray(cycles)) {
         throw new Error('Invalid data format: cycles should be an array');
     }
     const heartRates = cycles.map(cycle => cycle.score.average_heart_rate);
-    const restingHeartRates = cycles.map(cycle => cycle.score.resting_heart_rate || 0); // Include resting HR
+    const restingHeartRates = cycles.map(cycle => cycle.score.resting_heart_rate || 0);
     const maxHeartRate = Math.max(...heartRates);
     const minHeartRate = Math.min(...heartRates);
     const avgHeartRate = heartRates.reduce((acc, hr) => acc + hr, 0) / heartRates.length;
     const avgRestingHeartRate = restingHeartRates.reduce((acc, hr) => acc + hr, 0) / restingHeartRates.length;
 
-    // Calculate trends
     const heartRateTrend = calculateTrend(heartRates);
     const restingHeartRateTrend = calculateTrend(restingHeartRates);
 
@@ -40,24 +40,22 @@ const analyzeHeartRate = async (userId, cycles) => {
 
     await EnhancedData.findOneAndUpdate(
         { userId },
-        { $set: { heartRateMetrics } },
+        { $set: { heartRateMetrics } }, // Corrected field name
         { upsert: true, new: true }
     );
 
     return heartRateMetrics;
-    
 };
 
 // Improved Analyze HRV
 const analyzeHRV = async (userId, recoveries) => {
-    console.log('Recoveries:', recoveries); // Add this line
+    console.log('Recoveries:', recoveries); // Debugging line
     if (!Array.isArray(recoveries)) {
         throw new Error('Invalid data format: recoveries should be an array');
     }
     const hrvValues = recoveries.map(recovery => recovery.score.hrv_rmssd_milli);
     const avgHRV = hrvValues.reduce((acc, hrv) => acc + hrv, 0) / hrvValues.length;
 
-    // Calculate variability and trend
     const hrvVariability = calculateVariability(hrvValues);
     const hrvTrend = calculateTrend(hrvValues);
 
@@ -78,7 +76,7 @@ const analyzeHRV = async (userId, recoveries) => {
 
     await EnhancedData.findOneAndUpdate(
         { userId },
-        { $set: { hrvMetrics } },
+        { $set: { hrvMetrics } }, // Corrected field name
         { upsert: true, new: true }
     );
 
@@ -93,14 +91,12 @@ const analyzeStrainScore = async (userId, cycles) => {
     const strainScores = cycles.map(cycle => cycle.score.strain);
     const avgStrain = strainScores.reduce((acc, strain) => acc + strain, 0) / strainScores.length;
 
-    // Differentiate between types of strain
-    const strainTypes = cycles.map(cycle => cycle.activity_type); // Example field
+    const strainTypes = cycles.map(cycle => cycle.activity_type);
     const cardiovascularStrain = strainScores.filter((_, index) => strainTypes[index] === 'cardiovascular');
     const muscularStrain = strainScores.filter((_, index) => strainTypes[index] === 'muscular');
     const avgCardioStrain = cardiovascularStrain.reduce((acc, strain) => acc + strain, 0) / cardiovascularStrain.length || 0;
     const avgMuscularStrain = muscularStrain.reduce((acc, strain) => acc + strain, 0) / muscularStrain.length || 0;
 
-    // Analyze against personal activity levels
     const strainTrend = calculateTrend(strainScores);
 
     const recommendation = avgStrain > 10 
@@ -121,7 +117,7 @@ const analyzeStrainScore = async (userId, cycles) => {
 
     await EnhancedData.findOneAndUpdate(
         { userId },
-        { $set: { strainMetrics } },
+        { $set: { strainMetrics } }, // Corrected field name
         { upsert: true, new: true }
     );
 
@@ -137,7 +133,6 @@ const analyzeEnergyExpenditure = async (userId, cycles) => {
     const totalEnergyExpenditure = energyExpenditures.reduce((acc, energy) => acc + energy, 0);
     const avgEnergyExpenditure = totalEnergyExpenditure / energyExpenditures.length;
 
-    // Track energy expenditure trends
     const energyTrend = calculateTrend(energyExpenditures);
 
     const recommendation = totalEnergyExpenditure > 8000 
@@ -157,7 +152,7 @@ const analyzeEnergyExpenditure = async (userId, cycles) => {
 
     await EnhancedData.findOneAndUpdate(
         { userId },
-        { $set: { energyMetrics } },
+        { $set: { energyMetrics } }, // Corrected field name
         { upsert: true, new: true }
     );
 
@@ -172,13 +167,11 @@ const analyzeRecoveryMetrics = async (userId, recoveries) => {
     const recoveryScores = recoveries.map(recovery => recovery.score.recovery_score);
     const avgRecoveryScore = recoveryScores.reduce((acc, score) => acc + score, 0) / recoveryScores.length;
 
-    // Include additional recovery metrics
-    const muscleSorenessScores = recoveries.map(recovery => recovery.score.muscle_soreness || 0); // Example field
-    const mentalFatigueScores = recoveries.map(recovery => recovery.score.mental_fatigue || 0); // Example field
+    const muscleSorenessScores = recoveries.map(recovery => recovery.score.muscle_soreness || 0);
+    const mentalFatigueScores = recoveries.map(recovery => recovery.score.mental_fatigue || 0);
     const avgMuscleSoreness = muscleSorenessScores.reduce((acc, score) => acc + score, 0) / muscleSorenessScores.length;
     const avgMentalFatigue = mentalFatigueScores.reduce((acc, score) => acc + score, 0) / mentalFatigueScores.length;
 
-    // Analyze recovery trends
     const recoveryTrend = calculateTrend(recoveryScores);
 
     const recommendation = avgRecoveryScore < 50 
@@ -199,7 +192,7 @@ const analyzeRecoveryMetrics = async (userId, recoveries) => {
 
     await EnhancedData.findOneAndUpdate(
         { userId },
-        { $set: { recoveryMetrics } },
+        { $set: { recoveryMetrics } }, // Corrected field name
         { upsert: true, new: true }
     );
 
@@ -210,7 +203,6 @@ const analyzeRecoveryMetrics = async (userId, recoveries) => {
 const calculateCorrelationMatrix = (data) => {
     const correlationMatrix = {};
 
-    // Calculate correlations for each metric
     Object.keys(data).forEach(metric => {
         correlationMatrix[metric] = calculateCorrelations(data[metric], data);
     });
@@ -278,28 +270,63 @@ const calculateVariability = (data) => {
     return Math.sqrt(data.map(val => (val - mean) ** 2).reduce((acc, val) => acc + val, 0) / data.length);
 };
 
+// Refactored Glycemic Index Calculation
 const calculateGlycemicIndex = (meal) => {
-    // Implement glycemic index calculation logic
-    const estimatedGI = 50; // Placeholder value, replace with actual calculation
-    return estimatedGI;
+    if (!meal.carbs || meal.carbs === 0) return 0;
+
+    // Check if the GI is provided by the API
+    if (meal.glycemicIndex !== undefined) {
+        return meal.glycemicIndex;
+    }
+
+    // Basic fallback calculation for GI (average value used as an example)
+    const averageGI = 50; // Placeholder for a basic GI value
+    return averageGI;
 };
 
+// Refactored Glycemic Load Calculation
 const calculateGlycemicLoad = (meal) => {
-    // Implement glycemic load calculation logic
-    const estimatedGL = (meal.carbs * calculateGlycemicIndex(meal)) / 100;
-    return estimatedGL;
+    if (!meal.carbs || meal.carbs === 0) return 0;
+
+    // Check if the GL is provided by the API
+    if (meal.glycemicLoad !== undefined) {
+        return meal.glycemicLoad;
+    }
+
+    const gi = calculateGlycemicIndex(meal);
+    const glycemicLoad = (meal.carbs * gi) / 100;
+
+    return glycemicLoad;
 };
 
+// Analyze Glycemic Impact for a list of meals
 const analyzeGlycemicImpact = (meals) => {
     return meals.map(meal => {
         const glycemicIndex = calculateGlycemicIndex(meal);
         const glycemicLoad = calculateGlycemicLoad(meal);
+
         return {
             ...meal,
             glycemicIndex,
             glycemicLoad,
         };
     });
+};
+
+// Integrate scoring algorithms
+const analyzeMealNutrientScores = async (meal) => {
+    const scores = scoringService.calculateMealScores(meal);
+    return {
+        ...meal,
+        ...scores
+    };
+};
+
+// Analyze Meal with new scoring metrics
+const analyzeMeal = async (meal) => {
+    const glycemicImpact = analyzeGlycemicImpact([meal])[0];
+    const nutrientScores = await analyzeMealNutrientScores(glycemicImpact);
+    return nutrientScores;
 };
 
 module.exports = {
@@ -312,5 +339,8 @@ module.exports = {
     calculateVariability,
     calculateCorrelationMatrix,
     computePearsonCorrelation,
-    analyzeGlycemicImpact
+    analyzeGlycemicImpact,
+    calculateGlycemicIndex,
+    calculateGlycemicLoad,
+    analyzeMeal
 };

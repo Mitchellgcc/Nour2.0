@@ -1,5 +1,5 @@
 const express = require('express');
-const { getMeals, getMeal, createMeal, updateMeal, deleteMeal } = require('../controllers/mealController');
+const { getMeals, getMeal, createMeal, updateMeal, deleteMeal, logMeal } = require('../controllers/mealController');
 const { handleMealUpload } = require('../controllers/mealUploadController'); 
 const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -11,5 +11,6 @@ router.post('/', authMiddleware, createMeal);
 router.put('/:id', authMiddleware, updateMeal);
 router.delete('/:id', authMiddleware, deleteMeal);
 router.post('/upload', authMiddleware, handleMealUpload);
+router.post('/log', authMiddleware, logMeal);
 
 module.exports = router;
