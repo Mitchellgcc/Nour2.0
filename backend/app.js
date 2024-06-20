@@ -16,6 +16,8 @@ const inventoryRoutes = require('./routes/inventoryRoutes');
 const whoopRoutes = require('./routes/whoopRoutes');
 const userRoutes = require('./routes/userRoutes');
 const mealUploadController = require('./controllers/mealUploadController');
+const userPreferencesRoutes = require('./routes/userPreferencesRoutes');
+const userFeedbackRoutes = require('./routes/userFeedbackRoutes');
 
 console.log('Environment variables loaded:');
 console.log('POSTGRESQL_URI:', process.env.POSTGRESQL_URI);
@@ -72,6 +74,8 @@ app.use('/api/inventory', inventoryRoutes);
 app.use('/api/whoop', whoopRoutes);
 app.use('/api/user', userRoutes);
 app.post('/api/mealUpload', mealUploadController.handleMealUpload);
+app.use('/user', userPreferencesRoutes);
+app.use('/user', userFeedbackRoutes);
 
 app.get('/dashboard', (req, res) => {
   if (req.isAuthenticated()) {
