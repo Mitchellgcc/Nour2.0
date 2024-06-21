@@ -1,4 +1,4 @@
-// Updated database.js
+// backend/config/database.js
 
 const { Sequelize } = require('sequelize');
 const mongoose = require('mongoose');
@@ -16,24 +16,25 @@ const sequelize = new Sequelize(process.env.POSTGRESQL_URI, {
     timezone: 'Etc/GMT+0',
 });
 
+let isMongoConnected = false;
+
 const connectMongoDB = async () => {
-    return new Promise((resolve, reject) => {
-        mongoose.connect(process.env.MONGODB_URI);
-
-        mongoose.connection.once('open', () => {
-            console.log('MongoDB connected');
-            resolve();
+    if (mongoose.connection.readyState === 0) {
+        await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
         });
-
-        mongoose.connection.on('error', err => {
-            console.error('MongoDB connection error:', err);
-            reject(err);
-        });
-    });
+        isMongoConnected = true;
+        console.log('MongoDB connected');
+    }
 };
 
 const disconnectMongoDB = async () => {
-    return mongoose.disconnect();
+    if (mongoose.connection.readyState !== 0) {
+        await mongoose.disconnect();
+        isMongoConnected = false;
+        console.log('MongoDB disconnected');
+    }
 };
 
 module.exports = { sequelize, connectMongoDB, disconnectMongoDB };

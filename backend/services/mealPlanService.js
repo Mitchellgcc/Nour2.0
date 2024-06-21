@@ -1,5 +1,3 @@
-// backend/services/mealPlanService.js
-
 const Meal = require('../models/Meal');
 const UserPreferences = require('../models/UserPreferences');
 const WhoopData = require('../models/WhoopData');
@@ -77,7 +75,7 @@ async function generateMealPlan(userId) {
             throw new Error('User preferences not found');
         }
 
-        const mealOptions = await Meal.find();
+        const mealOptions = await Meal.findAll();
         let finalMeals = filterAndAdjustMeals(mealOptions, userPreferences);
 
         const whoopData = await WhoopData.findOne({ userId });
@@ -85,10 +83,21 @@ async function generateMealPlan(userId) {
             finalMeals = adjustMealsForRealTimeData(finalMeals, whoopData);
         }
 
+        // New: Include hydration goals and preferred meal types in the plan
+        const hydrationGoal = userPreferences.hydrationGoals || 2000; // Default to 2000ml
+        const supplementPreferences = userPreferences.supplementPreferences || [];
+
+        finalMeals.forEach(meal => {
+            meal.hydrationRecommendation = hydrationGoal / finalMeals.length;
+            meal.supplements = supplementPreferences; // Include supplements
+        });
+
         return {
             meals: finalMeals,
             mealFrequency: userPreferences.mealFrequency,
-            mealTimes: userPreferences.mealTimes
+            mealTimes: userPreferences.mealTimes,
+            hydrationGoal,
+            supplementPreferences
         };
     } catch (error) {
         console.error('Error generating meal plan:', error);
@@ -103,7 +112,8 @@ async function collectUserFeedback(userId, mealId, feedback) {
             userId,
             mealId,
             rating: feedback.rating,
-            comments: feedback.comments || ''
+            comments: feedback.comments || '',
+            detailedFeedback: feedback.detailedFeedback || '' // New field for more detailed feedback
         });
         await userFeedback.save();
         return userFeedback;
@@ -118,7 +128,7 @@ async function adjustMealsBasedOnFeedback(meals, userId) {
     const feedbacks = await UserFeedback.find({ userId });
 
     return meals.map(meal => {
-        const feedbackForMeal = feedbacks.find(fb => fb.mealId.toString() === meal._id.toString());
+        const feedbackForMeal = feedbacks.find(fb => fb.mealId.toString() === meal.id.toString());
 
         if (feedbackForMeal) {
             // Example adjustments based on feedback

@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"111cc41f869e4755b8904f1056d040b6","collectionName":"dailynutritionallogs","type":"collection"}
