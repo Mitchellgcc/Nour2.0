@@ -34,7 +34,6 @@ const getRecommendations = async (userId) => {
     const userPreferences = user.dietaryPreferences || {};
 
     let cycles = whoopData.cycles;
-    console.log('Cycles:', cycles); // Debugging line
     if (!Array.isArray(cycles)) {
       console.error(`Invalid data format for cycles: ${cycles}`);
       throw new Error('Invalid data format: cycles should be an array');

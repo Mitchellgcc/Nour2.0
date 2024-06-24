@@ -5,25 +5,25 @@ const User = require('../models/User');
 const WhoopData = require('../models/WhoopData');
 const logger = require('../config/logger');
 
-// Function to normalize and clean data
 const normalizeData = (data) => {
+  console.log(`Normalizing data:`, data);
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   const roundNumber = (num) => Math.round(num * 100) / 100;
-  const ensureMilliseconds = (value) => value * 1000; // Assuming value is in seconds, convert to milliseconds
+  const ensureMilliseconds = (value) => value * 1000;
 
-  // Normalize profile data
   const normalizeProfile = (profile) => {
+    console.log(`Normalizing profile data:`, profile);
     return {
       ...profile,
-      user_id: profile.user_id.toString(), // Ensure user_id is a string
-      email: profile.email.toLowerCase(), // Ensure email is lowercase
+      user_id: profile.user_id.toString(),
+      email: profile.email.toLowerCase(),
       first_name: capitalize(profile.first_name),
       last_name: capitalize(profile.last_name),
     };
   };
 
-  // Normalize cycle data
   const normalizeCycles = (cycles) => {
+    console.log(`Normalizing cycles data:`, cycles);
     return cycles.map(cycle => ({
       ...cycle,
       created_at: new Date(cycle.created_at).toISOString(),
@@ -40,8 +40,8 @@ const normalizeData = (data) => {
     }));
   };
 
-  // Normalize recovery data
   const normalizeRecoveries = (recoveries) => {
+    console.log(`Normalizing recoveries data:`, recoveries);
     return recoveries.map(recovery => ({
       ...recovery,
       created_at: new Date(recovery.created_at).toISOString(),
@@ -57,8 +57,8 @@ const normalizeData = (data) => {
     }));
   };
 
-  // Normalize sleep data
   const normalizeSleepData = (sleepData) => {
+    console.log(`Normalizing sleep data:`, sleepData);
     return sleepData.map(sleep => ({
       ...sleep,
       created_at: new Date(sleep.created_at).toISOString(),
@@ -89,8 +89,8 @@ const normalizeData = (data) => {
     }));
   };
 
-  // Normalize workout data
   const normalizeWorkouts = (workouts) => {
+    console.log(`Normalizing workouts data:`, workouts);
     return workouts.map(workout => ({
       ...workout,
       created_at: new Date(workout.created_at).toISOString(),
@@ -120,7 +120,6 @@ const normalizeData = (data) => {
     }));
   };
 
-  // Normalize the entire data object
   return {
     ...data,
     profile: normalizeProfile(data.profile),
@@ -140,12 +139,14 @@ const syncWhoopDataForAllUsers = async () => {
     try {
       if (user.whoopAccessToken) {
         logger.info(`Syncing data for user: ${user.id}`);
+        console.log(`[${new Date().toISOString()}] Preparing to sync data for user ${user.id}`);
         const userReq = { user: user };
-        const whoopData = await syncWhoopData(userReq, null); // Fetch the data
+        const whoopData = await syncWhoopData(userReq, null);
+        console.log(`[${new Date().toISOString()}] Data received for user ${user.id}:`, whoopData);
 
         if (whoopData) {
-          const normalizedData = normalizeData(whoopData); // Normalize and clean the data
-          // Store the normalized data in MongoDB
+          const normalizedData = normalizeData(whoopData);
+          console.log(`[${new Date().toISOString()}] Normalized data for user ${user.id}:`, normalizedData);
           await WhoopData.updateOne(
             { userId: user.id },
             { $set: normalizedData },
@@ -157,13 +158,12 @@ const syncWhoopDataForAllUsers = async () => {
         logger.info(`User ${user.id} does not have a valid Whoop access token.`);
       }
     } catch (error) {
-      logger.error('Error during data synchronization:', error);
+      logger.error(`[${new Date().toISOString()}] Error during data synchronization for user ${user.id}:`, error.message, error.stack);
     }
   }
-  await deriveInsights(); // Derive insights after syncing data
+  await deriveInsights();
 };
 
-// Schedule to run every 10 seconds
 cron.schedule('*/10 * * * * *', syncWhoopDataForAllUsers);
 
 module.exports = {

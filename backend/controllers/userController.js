@@ -2,6 +2,7 @@
 
 const User = require('../models/User');
 
+// Check user token
 const checkUserToken = async (req, res) => {
   try {
     const user = await User.findOne({ where: { email: req.body.email } });
@@ -14,6 +15,7 @@ const checkUserToken = async (req, res) => {
   }
 };
 
+// Export the controller methods
 module.exports = {
   checkUserToken,
 };

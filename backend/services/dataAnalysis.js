@@ -6,7 +6,6 @@ const scoringService = require('./scoringService'); // Import scoring service
 
 // Enhanced Analyze Heart Rate
 const analyzeHeartRate = async (userId, cycles) => {
-    console.log('Cycles:', cycles); // Debugging line
     if (!Array.isArray(cycles)) {
         throw new Error('Invalid data format: cycles should be an array');
     }
@@ -49,7 +48,6 @@ const analyzeHeartRate = async (userId, cycles) => {
 
 // Improved Analyze HRV
 const analyzeHRV = async (userId, recoveries) => {
-    console.log('Recoveries:', recoveries); // Debugging line
     if (!Array.isArray(recoveries)) {
         throw new Error('Invalid data format: recoveries should be an array');
     }

@@ -33,98 +33,39 @@ const Meal = sequelize.define('Meal', {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  micronutrients: {
-    type: DataTypes.JSON,
-    allowNull: true,
-  },
-  vitamins: {
-    type: DataTypes.JSON, // Storing detailed vitamins
-    allowNull: true,
-  },
-  minerals: {
-    type: DataTypes.JSON, // Storing detailed minerals
-    allowNull: true,
-  },
-  glycemicIndex: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  glycemicLoad: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  waterContent: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  omega3: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  omega6: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  polyphenols: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  antioxidants: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  solubleFiber: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  insolubleFiber: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  sodium: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  cholesterol: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  fiber: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  sugar: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  aminoAcids: {
-    type: DataTypes.JSON, // Detailed amino acids profile
-    allowNull: true,
-  },
-  fattyAcids: {
-    type: DataTypes.JSON, // Detailed fatty acids profile
-    allowNull: true,
-  },
-  nutrientDensityScore: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  healthImpactScore: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  inflammationScore: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  oxidativeStressScore: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
-  microbiomeImpactScore: {
-    type: DataTypes.FLOAT,
-    allowNull: true,
-  },
+  micronutrients: { type: DataTypes.JSON, allowNull: true },
+  vitamins: { type: DataTypes.JSON, allowNull: true }, // e.g., { A: 500, C: 30 }
+  minerals: { type: DataTypes.JSON, allowNull: true }, // e.g., { calcium: 200, iron: 15 }
+  glycemicIndex: { type: DataTypes.FLOAT, allowNull: true },
+  glycemicLoad: { type: DataTypes.FLOAT, allowNull: true },
+  waterContent: { type: DataTypes.FLOAT, allowNull: true },
+  omega3: { type: DataTypes.FLOAT, allowNull: true },
+  omega6: { type: DataTypes.FLOAT, allowNull: true },
+  polyphenols: { type: DataTypes.FLOAT, allowNull: true },
+  antioxidants: { type: DataTypes.FLOAT, allowNull: true },
+  solubleFiber: { type: DataTypes.FLOAT, allowNull: true },
+  insolubleFiber: { type: DataTypes.FLOAT, allowNull: true },
+  sodium: { type: DataTypes.FLOAT, allowNull: true },
+  cholesterol: { type: DataTypes.FLOAT, allowNull: true },
+  fiber: { type: DataTypes.FLOAT, allowNull: true },
+  sugar: { type: DataTypes.FLOAT, allowNull: true },
+  aminoAcids: { 
+    type: DataTypes.JSON, 
+    allowNull: true 
+  }, // e.g., { leucine: 2.5, lysine: 1.8 }
+  fattyAcids: { 
+    type: DataTypes.JSON, 
+    allowNull: true 
+  }, // e.g., { saturated: 10, unsaturated: 20 }
+  nutrientDensityScore: { type: DataTypes.FLOAT, allowNull: true },
+  healthImpactScore: { type: DataTypes.FLOAT, allowNull: true },
+  inflammationScore: { type: DataTypes.FLOAT, allowNull: true },
+  oxidativeStressScore: { type: DataTypes.FLOAT, allowNull: true },
+  microbiomeImpactScore: { type: DataTypes.FLOAT, allowNull: true },
+  allergens: { 
+    type: [String], 
+    allowNull: true 
+  }, // e.g., ['nuts', 'soy']
   userId: {
     type: DataTypes.UUID,
     allowNull: false,

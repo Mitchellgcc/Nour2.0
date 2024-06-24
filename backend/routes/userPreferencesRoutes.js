@@ -1,3 +1,5 @@
+// backend/routes/userPreferencesRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const UserPreferences = require('../models/UserPreferences');
@@ -7,7 +9,19 @@ const { check, validationResult } = require('express-validator');
 router.post('/preferences', [
   check('userId').not().isEmpty().withMessage('User ID is required'),
   check('preferredCuisines').isArray().optional(),
-  check('healthGoals').isIn(['weight loss', 'muscle gain', 'maintenance', 'endurance', 'general health', 'cardiovascular health']).optional(),
+  check('healthGoals').isArray().optional().isIn([
+    'weight loss', 
+    'muscle gain', 
+    'maintenance', 
+    'endurance', 
+    'general health', 
+    'cardiovascular health', 
+    'improve heart health', 
+    'increase muscle mass', 
+    'reduce body fat', 
+    'improve flexibility', 
+    'increase stamina'
+  ]).withMessage('Invalid health goal'),
   check('dietaryRestrictions').isArray().optional(),
   check('allergies').isArray().optional(),
   check('macroTargets.proteins').isInt({ min: 0, max: 500 }).optional(),
@@ -19,7 +33,15 @@ router.post('/preferences', [
   check('supplementPreferences').isArray().optional(),
   check('preferredMealTypes').isArray().optional(),
   check('preferredIngredients').isArray().optional(),
-  check('fitnessLevel').isIn(['beginner', 'intermediate', 'advanced']).optional()
+  check('dislikedIngredients').isArray().optional(),
+  check('fitnessLevel').isIn(['beginner', 'intermediate', 'advanced']).optional(),
+  check('preferredActivities').isArray().optional(),
+  check('mealtimePreferences').isIn(['early', 'regular', 'late']).optional(),
+  check('snackPreferences').isArray().optional(),
+  check('alcoholConsumption').isIn(['none', 'occasional', 'moderate', 'regular']).optional(),
+  check('caffeineConsumption').isIn(['none', 'low', 'moderate', 'high']).optional(),
+  check('sleepQuality').isIn(['poor', 'average', 'good', 'excellent']).optional(),
+  check('stressLevel').isIn(['low', 'medium', 'high']).optional()
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -39,7 +61,15 @@ router.post('/preferences', [
     supplementPreferences,
     preferredMealTypes,
     preferredIngredients,
-    fitnessLevel
+    dislikedIngredients,
+    fitnessLevel,
+    preferredActivities,
+    mealtimePreferences,
+    snackPreferences,
+    alcoholConsumption,
+    caffeineConsumption,
+    sleepQuality,
+    stressLevel
   } = req.body;
 
   try {
@@ -58,7 +88,15 @@ router.post('/preferences', [
       userPreferences.supplementPreferences = supplementPreferences || userPreferences.supplementPreferences;
       userPreferences.preferredMealTypes = preferredMealTypes || userPreferences.preferredMealTypes;
       userPreferences.preferredIngredients = preferredIngredients || userPreferences.preferredIngredients;
+      userPreferences.dislikedIngredients = dislikedIngredients || userPreferences.dislikedIngredients;
       userPreferences.fitnessLevel = fitnessLevel || userPreferences.fitnessLevel;
+      userPreferences.preferredActivities = preferredActivities || userPreferences.preferredActivities;
+      userPreferences.mealtimePreferences = mealtimePreferences || userPreferences.mealtimePreferences;
+      userPreferences.snackPreferences = snackPreferences || userPreferences.snackPreferences;
+      userPreferences.alcoholConsumption = alcoholConsumption || userPreferences.alcoholConsumption;
+      userPreferences.caffeineConsumption = caffeineConsumption || userPreferences.caffeineConsumption;
+      userPreferences.sleepQuality = sleepQuality || userPreferences.sleepQuality;
+      userPreferences.stressLevel = stressLevel || userPreferences.stressLevel;
     } else {
       // Create new preferences
       userPreferences = new UserPreferences({
@@ -74,7 +112,15 @@ router.post('/preferences', [
         supplementPreferences,
         preferredMealTypes,
         preferredIngredients,
-        fitnessLevel
+        dislikedIngredients,
+        fitnessLevel,
+        preferredActivities,
+        mealtimePreferences,
+        snackPreferences,
+        alcoholConsumption,
+        caffeineConsumption,
+        sleepQuality,
+        stressLevel
       });
     }
 
@@ -99,6 +145,18 @@ router.get('/preferences/:userId', async (req, res) => {
     res.status(200).json({ data: userPreferences });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching user preferences', error });
+  }
+});
+
+// Delete User Preferences
+router.delete('/preferences/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    await UserPreferences.findOneAndDelete({ userId });
+    res.status(200).json({ message: 'User preferences deleted' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting user preferences', error });
   }
 });
 
