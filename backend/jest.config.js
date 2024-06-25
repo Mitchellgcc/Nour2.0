@@ -1,4 +1,4 @@
-// Nour2.0/backend/jest.config.js
+// backend/jest.config.js
 
 module.exports = {
   setupFilesAfterEnv: ['./jest.setup.js'],

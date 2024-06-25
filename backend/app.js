@@ -1,3 +1,5 @@
+// backend/app.js
+
 require('dotenv').config();
 
 const express = require('express');
@@ -61,7 +63,7 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/meals', mealRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/whoop', whoopRoutes);
-app.use('/api/user', userRoutes);
+app.use('/api/users', userRoutes); // Corrected the endpoint path
 app.post('/api/mealUpload', mealUploadController.handleMealUpload);
 app.use('/api/user/preferences', userPreferencesRoutes);
 app.use('/api/user/feedback', userFeedbackRoutes);

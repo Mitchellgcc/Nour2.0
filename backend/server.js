@@ -1,3 +1,5 @@
+// backend/server.js
+
 const app = require('./app');
 const { sequelize } = require('./config/database');
 const dotenv = require('dotenv');

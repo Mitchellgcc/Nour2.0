@@ -1,3 +1,5 @@
+// backend/routes/mealRoutes.js
+
 const express = require('express');
 const { getMeals, getMeal, createMeal, updateMeal, deleteMeal, logMeal } = require('../controllers/mealController');
 const { handleMealUpload } = require('../controllers/mealUploadController'); 

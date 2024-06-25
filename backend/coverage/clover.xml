@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1719312367425" clover="3.2.0">
-  <project timestamp="1719312367425" name="All files">
-    <metrics statements="1096" coveredstatements="275" conditionals="484" coveredconditionals="5" methods="114" coveredmethods="2" elements="1694" coveredelements="282" complexity="0" loc="1096" ncloc="1096" packages="8" files="31" classes="31"/>
+<coverage generated="1719317054199" clover="3.2.0">
+  <project timestamp="1719317054199" name="All files">
+    <metrics statements="1039" coveredstatements="310" conditionals="452" coveredconditionals="24" methods="102" coveredmethods="8" elements="1593" coveredelements="342" complexity="0" loc="1039" ncloc="1039" packages="8" files="30" classes="30"/>
     <package name="backend">
       <metrics statements="70" coveredstatements="53" conditionals="6" coveredconditionals="0" methods="9" coveredmethods="1"/>
       <file name="app.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/app.js">
         <metrics statements="70" coveredstatements="53" conditionals="6" coveredconditionals="0" methods="9" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
@@ -24,29 +22,29 @@
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
-        <line num="60" count="1" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
         <line num="63" count="1" type="stmt"/>
@@ -54,34 +52,36 @@
         <line num="65" count="1" type="stmt"/>
         <line num="66" count="1" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
         <line num="69" count="1" type="stmt"/>
-        <line num="70" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="71" count="0" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="73" count="0" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="82" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="89" count="1" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
         <line num="92" count="0" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
         <line num="94" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
         <line num="96" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="105" count="1" type="stmt"/>
-        <line num="106" count="1" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="102" count="0" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
         <line num="108" count="1" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
       </file>
     </package>
     <package name="backend.config">
-      <metrics statements="57" coveredstatements="25" conditionals="10" coveredconditionals="1" methods="7" coveredmethods="1"/>
+      <metrics statements="57" coveredstatements="26" conditionals="10" coveredconditionals="1" methods="7" coveredmethods="1"/>
       <file name="database.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/config/database.js">
-        <metrics statements="17" coveredstatements="10" conditionals="4" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <metrics statements="17" coveredstatements="11" conditionals="4" coveredconditionals="1" methods="2" coveredmethods="1"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -90,7 +90,7 @@
         <line num="19" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
         <line num="22" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="23" count="0" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
@@ -145,7 +145,7 @@
       </file>
     </package>
     <package name="backend.controllers">
-      <metrics statements="485" coveredstatements="70" conditionals="177" coveredconditionals="2" methods="50" coveredmethods="0"/>
+      <metrics statements="453" coveredstatements="89" conditionals="164" coveredconditionals="15" methods="46" coveredmethods="5"/>
       <file name="authController.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/authController.js">
         <metrics statements="46" coveredstatements="9" conditionals="10" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -195,79 +195,47 @@
         <line num="86" count="1" type="stmt"/>
         <line num="87" count="0" type="stmt"/>
       </file>
-      <file name="inventoryUploadController.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/inventoryUploadController.js">
-        <metrics statements="71" coveredstatements="12" conditionals="31" coveredconditionals="1" methods="9" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+      <file name="inventoryController.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/inventoryController.js">
+        <metrics statements="39" coveredstatements="31" conditionals="18" coveredconditionals="14" methods="5" coveredmethods="5"/>
+        <line num="2" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="13" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="57" count="0" type="cond" truecount="0" falsecount="5"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="46" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="47" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="60" count="1" type="cond" truecount="3" falsecount="1"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="87" count="0" type="stmt"/>
-        <line num="103" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="105" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="106" count="0" type="stmt"/>
-        <line num="108" count="0" type="stmt"/>
-        <line num="113" count="0" type="stmt"/>
-        <line num="114" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="115" count="0" type="stmt"/>
-        <line num="116" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="117" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="124" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="126" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="127" count="0" type="stmt"/>
-        <line num="130" count="0" type="stmt"/>
-        <line num="131" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="133" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="134" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="138" count="0" type="stmt"/>
-        <line num="139" count="0" type="stmt"/>
-        <line num="140" count="0" type="stmt"/>
-        <line num="141" count="0" type="stmt"/>
-        <line num="143" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="144" count="0" type="stmt"/>
-        <line num="147" count="0" type="stmt"/>
-        <line num="148" count="0" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="151" count="0" type="stmt"/>
-        <line num="152" count="0" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="156" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="157" count="0" type="stmt"/>
-        <line num="158" count="0" type="stmt"/>
-        <line num="161" count="0" type="stmt"/>
-        <line num="166" count="0" type="stmt"/>
-        <line num="168" count="0" type="stmt"/>
-        <line num="170" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="171" count="0" type="stmt"/>
-        <line num="172" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="179" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
       </file>
       <file name="mealController.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/mealController.js">
         <metrics statements="81" coveredstatements="9" conditionals="76" coveredconditionals="0" methods="7" coveredmethods="0"/>
@@ -654,37 +622,37 @@
       </file>
     </package>
     <package name="backend.middlewares">
-      <metrics statements="39" coveredstatements="6" conditionals="12" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="39" coveredstatements="21" conditionals="12" coveredconditionals="6" methods="1" coveredmethods="1"/>
       <file name="authMiddleware.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/middlewares/authMiddleware.js">
-        <metrics statements="39" coveredstatements="6" conditionals="12" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="39" coveredstatements="21" conditionals="12" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="11" count="5" type="cond" truecount="1" falsecount="1"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="19" count="5" type="cond" truecount="1" falsecount="1"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="28" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="24" count="5" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="28" count="5" type="cond" truecount="3" falsecount="1"/>
         <line num="29" count="0" type="stmt"/>
         <line num="30" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="33" count="5" type="stmt"/>
+        <line num="34" count="5" type="cond" truecount="1" falsecount="1"/>
         <line num="35" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="38" count="5" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
+        <line num="41" count="5" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
         <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="45" count="0" type="stmt"/>
@@ -699,7 +667,14 @@
       </file>
     </package>
     <package name="backend.models">
-      <metrics statements="20" coveredstatements="20" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <metrics statements="24" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <file name="InventoryItem.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/models/InventoryItem.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+      </file>
       <file name="Meal.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/models/Meal.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
@@ -737,7 +712,7 @@
       </file>
     </package>
     <package name="backend.routes">
-      <metrics statements="132" coveredstatements="67" conditionals="55" coveredconditionals="0" methods="10" coveredmethods="0"/>
+      <metrics statements="136" coveredstatements="71" conditionals="55" coveredconditionals="0" methods="10" coveredmethods="0"/>
       <file name="authRoutes.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/routes/authRoutes.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
@@ -749,29 +724,33 @@
         <line num="11" count="1" type="stmt"/>
       </file>
       <file name="inventoryRoutes.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/routes/inventoryRoutes.js">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
       </file>
       <file name="mealRoutes.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/routes/mealRoutes.js">
         <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
       </file>
       <file name="profileRoutes.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/routes/profileRoutes.js">
         <metrics statements="11" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
@@ -1071,7 +1050,7 @@
       </file>
     </package>
     <package name="backend.utils">
-      <metrics statements="127" coveredstatements="14" conditionals="97" coveredconditionals="0" methods="18" coveredmethods="0"/>
+      <metrics statements="94" coveredstatements="6" conditionals="78" coveredconditionals="0" methods="10" coveredmethods="0"/>
       <file name="dataNormalization.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/utils/dataNormalization.js">
         <metrics statements="23" coveredstatements="1" conditionals="22" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
@@ -1112,45 +1091,6 @@
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
-      </file>
-      <file name="handleAxiosError.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/utils/handleAxiosError.js">
-        <metrics statements="7" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-      </file>
-      <file name="helpers.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/utils/helpers.js">
-        <metrics statements="26" coveredstatements="6" conditionals="15" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="29" count="0" type="cond" truecount="0" falsecount="5"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="38" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
       </file>
       <file name="validationUtils.js" path="/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/utils/validationUtils.js">
         <metrics statements="59" coveredstatements="1" conditionals="52" coveredconditionals="0" methods="4" coveredmethods="0"/>
