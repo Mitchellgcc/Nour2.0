@@ -63,7 +63,7 @@ const Meal = sequelize.define('Meal', {
   oxidativeStressScore: { type: DataTypes.FLOAT, allowNull: true },
   microbiomeImpactScore: { type: DataTypes.FLOAT, allowNull: true },
   allergens: { 
-    type: [String], 
+    type: DataTypes.JSON, 
     allowNull: true 
   }, // e.g., ['nuts', 'soy']
   userId: {

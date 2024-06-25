@@ -11,7 +11,7 @@ require('./config/passport');
 const { sequelize, connectMongoDB, disconnectMongoDB } = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
-const mealRoutes = require('./routes/mealRoutes'); 
+const mealRoutes = require('./routes/mealRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
 const whoopRoutes = require('./routes/whoopRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -41,27 +41,16 @@ const app = express();
     }
 })();
 
-(async () => {
-  try {
-      await sequelize.authenticate();
-      console.log('PostgreSQL connected');
-      await connectMongoDB();
-  } catch (error) {
-      console.error('Database connection error:', error);
-      process.exit(1);
-  }
-})();
-
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  store: new SequelizeStore({ db: sequelize }),
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false }
+    secret: process.env.SESSION_SECRET,
+    store: new SequelizeStore({ db: sequelize }),
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
 }));
 
 app.use(passport.initialize());
@@ -69,48 +58,48 @@ app.use(passport.session());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
-app.use('/api/meals', mealRoutes); 
+app.use('/api/meals', mealRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/whoop', whoopRoutes);
 app.use('/api/user', userRoutes);
 app.post('/api/mealUpload', mealUploadController.handleMealUpload);
-app.use('/user', userPreferencesRoutes);
-app.use('/user', userFeedbackRoutes);
+app.use('/api/user/preferences', userPreferencesRoutes);
+app.use('/api/user/feedback', userFeedbackRoutes);
 
 app.get('/dashboard', (req, res) => {
-  if (req.isAuthenticated()) {
-      res.send('Welcome to your dashboard');
-  } else {
-      res.redirect('/login');
-  }
+    if (req.isAuthenticated()) {
+        res.send('Welcome to your dashboard');
+    } else {
+        res.redirect('/login');
+    }
 });
 
 app.get('/', (req, res) => {
-  res.send('NOUR2.0 API');
+    res.send('NOUR2.0 API');
 });
 
 app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode).json({
-      message: err.message,
-      stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,
-  });
+    const statusCode = err.statusCode || 500;
+    res.status(statusCode).json({
+        message: err.message,
+        stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,
+    });
 });
 
 const gracefulShutdown = () => {
-  disconnectMongoDB().then(() => {
-      console.log('MongoDB disconnected');
-      sequelize.close().then(() => {
-          console.log('PostgreSQL disconnected');
-          process.exit(0);
-      }).catch(err => {
-          console.error('Error closing PostgreSQL:', err);
-          process.exit(1);
-      });
-  }).catch(err => {
-      console.error('Error closing MongoDB:', err);
-      process.exit(1);
-  });
+    disconnectMongoDB().then(() => {
+        console.log('MongoDB disconnected');
+        sequelize.close().then(() => {
+            console.log('PostgreSQL disconnected');
+            process.exit(0);
+        }).catch(err => {
+            console.error('Error closing PostgreSQL:', err);
+            process.exit(1);
+        });
+    }).catch(err => {
+        console.error('Error closing MongoDB:', err);
+        process.exit(1);
+    });
 };
 
 process.on('SIGINT', gracefulShutdown);

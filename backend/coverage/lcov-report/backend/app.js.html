@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.32% </span>
+                <span class="strong">75.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>58/77</span>
+                <span class='fraction'>53/70</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/10</span>
+                <span class='fraction'>1/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.32% </span>
+                <span class="strong">75.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>58/77</span>
+                <span class='fraction'>53/70</span>
             </div>
         
             
@@ -171,17 +171,7 @@
 <a name='L106'></a><a href='#L106'>106</a>
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
-<a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L109'></a><a href='#L109'>109</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -211,17 +201,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -299,7 +278,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">require('dotenv').config();
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">require('dotenv').config();
 &nbsp;
 const express = require('express');
 const cors = require('cors');
@@ -312,7 +292,7 @@ require('./config/passport');
 const { sequelize, connectMongoDB, disconnectMongoDB } = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
-const mealRoutes = require('./routes/mealRoutes'); 
+const mealRoutes = require('./routes/mealRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
 const whoopRoutes = require('./routes/whoopRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -342,27 +322,16 @@ const app = express();
     }
 })();
 &nbsp;
-(async () =&gt; {
-  try {
-      await sequelize.authenticate();
-      console.log('PostgreSQL connected');
-      await connectMongoDB();
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >      console.error('Database connection error:', error);</span>
-<span class="cstat-no" title="statement not covered" >      process.exit(1);</span>
-  }
-})();
-&nbsp;
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 &nbsp;
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  store: new SequelizeStore({ db: sequelize }),
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false }
+    secret: process.env.SESSION_SECRET,
+    store: new SequelizeStore({ db: sequelize }),
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
 }));
 &nbsp;
 app.use(passport.initialize());
@@ -370,61 +339,62 @@ app.use(passport.session());
 &nbsp;
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
-app.use('/api/meals', mealRoutes); 
+app.use('/api/meals', mealRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/whoop', whoopRoutes);
 app.use('/api/user', userRoutes);
 app.post('/api/mealUpload', mealUploadController.handleMealUpload);
-app.use('/user', userPreferencesRoutes);
-app.use('/user', userFeedbackRoutes);
+app.use('/api/user/preferences', userPreferencesRoutes);
+app.use('/api/user/feedback', userFeedbackRoutes);
 &nbsp;
 app.get('/dashboard', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  if (req.isAuthenticated()) {</span>
-<span class="cstat-no" title="statement not covered" >      res.send('Welcome to your dashboard');</span>
-  } else {
-<span class="cstat-no" title="statement not covered" >      res.redirect('/login');</span>
-  }
+<span class="cstat-no" title="statement not covered" >    if (req.isAuthenticated()) {</span>
+<span class="cstat-no" title="statement not covered" >        res.send('Welcome to your dashboard');</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        res.redirect('/login');</span>
+    }
 });
 &nbsp;
 app.get('/', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  res.send('NOUR2.0 API');</span>
+<span class="cstat-no" title="statement not covered" >    res.send('NOUR2.0 API');</span>
 });
 &nbsp;
 app.use(<span class="fstat-no" title="function not covered" >(e</span>rr, req, res, next) =&gt; {
-  const statusCode = <span class="cstat-no" title="statement not covered" >err.statusCode || 500;</span>
-<span class="cstat-no" title="statement not covered" >  res.status(statusCode).json({</span>
-      message: err.message,
-      stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,
-  });
+    const statusCode = <span class="cstat-no" title="statement not covered" >err.statusCode || 500;</span>
+<span class="cstat-no" title="statement not covered" >    res.status(statusCode).json({</span>
+        message: err.message,
+        stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,
+    });
 });
 &nbsp;
 const gracefulShutdown = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >  disconnectMongoDB().then(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      console.log('MongoDB disconnected');</span>
-<span class="cstat-no" title="statement not covered" >      sequelize.close().then(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >          console.log('PostgreSQL disconnected');</span>
-<span class="cstat-no" title="statement not covered" >          process.exit(0);</span>
-      }).catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
-<span class="cstat-no" title="statement not covered" >          console.error('Error closing PostgreSQL:', err);</span>
-<span class="cstat-no" title="statement not covered" >          process.exit(1);</span>
-      });
-  }).catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
-<span class="cstat-no" title="statement not covered" >      console.error('Error closing MongoDB:', err);</span>
-<span class="cstat-no" title="statement not covered" >      process.exit(1);</span>
-  });
+<span class="cstat-no" title="statement not covered" >    disconnectMongoDB().then(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        console.log('MongoDB disconnected');</span>
+<span class="cstat-no" title="statement not covered" >        sequelize.close().then(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('PostgreSQL disconnected');</span>
+<span class="cstat-no" title="statement not covered" >            process.exit(0);</span>
+        }).catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >            console.error('Error closing PostgreSQL:', err);</span>
+<span class="cstat-no" title="statement not covered" >            process.exit(1);</span>
+        });
+    }).catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >        console.error('Error closing MongoDB:', err);</span>
+<span class="cstat-no" title="statement not covered" >        process.exit(1);</span>
+    });
 };
 &nbsp;
 process.on('SIGINT', gracefulShutdown);
 process.on('SIGTERM', gracefulShutdown);
 &nbsp;
-module.exports = app;</pre></td></tr></table></pre>
+module.exports = app;
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-24T13:14:25.681Z
+                at 2024-06-25T10:46:07.403Z
             </div>
         <script src="../prettify.js"></script>
         <script>
