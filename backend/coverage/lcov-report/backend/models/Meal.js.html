@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
@@ -133,21 +133,14 @@
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -207,91 +200,77 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// backend/models/Meal.js
 &nbsp;
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
+const mongoose = require('mongoose');
 &nbsp;
-const Meal = sequelize.define('Meal', {
+const mealSchema = new mongoose.Schema({
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: String,
+    default: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >new mongoose.Types.ObjectId().toString(),</span>
     primaryKey: true,
   },
   name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   description: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: String,
+    required: false,
   },
   calories: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
+    type: Number,
+    required: true,
   },
   protein: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
+    type: Number,
+    required: true,
   },
   carbs: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
+    type: Number,
+    required: true,
   },
   fat: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
+    type: Number,
+    required: true,
   },
-  micronutrients: { type: DataTypes.JSON, allowNull: true },
-  vitamins: { type: DataTypes.JSON, allowNull: true }, // e.g., { A: 500, C: 30 }
-  minerals: { type: DataTypes.JSON, allowNull: true }, // e.g., { calcium: 200, iron: 15 }
-  glycemicIndex: { type: DataTypes.FLOAT, allowNull: true },
-  glycemicLoad: { type: DataTypes.FLOAT, allowNull: true },
-  waterContent: { type: DataTypes.FLOAT, allowNull: true },
-  omega3: { type: DataTypes.FLOAT, allowNull: true },
-  omega6: { type: DataTypes.FLOAT, allowNull: true },
-  polyphenols: { type: DataTypes.FLOAT, allowNull: true },
-  antioxidants: { type: DataTypes.FLOAT, allowNull: true },
-  solubleFiber: { type: DataTypes.FLOAT, allowNull: true },
-  insolubleFiber: { type: DataTypes.FLOAT, allowNull: true },
-  sodium: { type: DataTypes.FLOAT, allowNull: true },
-  cholesterol: { type: DataTypes.FLOAT, allowNull: true },
-  fiber: { type: DataTypes.FLOAT, allowNull: true },
-  sugar: { type: DataTypes.FLOAT, allowNull: true },
-  aminoAcids: { 
-    type: DataTypes.JSON, 
-    allowNull: true 
-  }, // e.g., { leucine: 2.5, lysine: 1.8 }
-  fattyAcids: { 
-    type: DataTypes.JSON, 
-    allowNull: true 
-  }, // e.g., { saturated: 10, unsaturated: 20 }
-  nutrientDensityScore: { type: DataTypes.FLOAT, allowNull: true },
-  healthImpactScore: { type: DataTypes.FLOAT, allowNull: true },
-  inflammationScore: { type: DataTypes.FLOAT, allowNull: true },
-  oxidativeStressScore: { type: DataTypes.FLOAT, allowNull: true },
-  microbiomeImpactScore: { type: DataTypes.FLOAT, allowNull: true },
-  allergens: { 
-    type: DataTypes.JSON, 
-    allowNull: true 
-  }, // e.g., ['nuts', 'soy']
+  micronutrients: {
+    vitamins: { type: Map, of: Number, required: false },
+    minerals: { type: Map, of: Number, required: false }
+  },
+  glycemicIndex: { type: Number, required: false },
+  glycemicLoad: { type: Number, required: false },
+  waterContent: { type: Number, required: false },
+  omega3: { type: Number, required: false },
+  omega6: { type: Number, required: false },
+  polyphenols: { type: Number, required: false },
+  antioxidants: { type: Number, required: false },
+  solubleFiber: { type: Number, required: false },
+  insolubleFiber: { type: Number, required: false },
+  sodium: { type: Number, required: false },
+  cholesterol: { type: Number, required: false },
+  fiber: { type: Number, required: false },
+  sugar: { type: Number, required: false },
+  aminoAcids: { type: Map, of: Number, required: false },
+  fattyAcids: { type: Map, of: Number, required: false },
+  nutrientDensityScore: { type: Number, required: false },
+  healthImpactScore: { type: Number, required: false },
+  inflammationScore: { type: Number, required: false },
+  oxidativeStressScore: { type: Number, required: false },
+  microbiomeImpactScore: { type: Number, required: false },
+  allergens: { type: [String], required: false },
   userId: {
-    type: DataTypes.UUID,
-    allowNull: false,
+    type: String,
+    required: true,
   },
 }, {
   timestamps: true,
 });
+&nbsp;
+const Meal = mongoose.model('Meal', mealSchema);
 &nbsp;
 module.exports = Meal;
 &nbsp;</pre></td></tr></table></pre>
@@ -301,7 +280,7 @@ module.exports = Meal;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-25T12:04:14.165Z
+                at 2024-07-08T14:45:34.273Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

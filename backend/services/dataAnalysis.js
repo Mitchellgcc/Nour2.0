@@ -2,7 +2,7 @@
 
 const EnhancedData = require('../models/EnhancedData');
 const logger = require('../config/logger');
-const scoringService = require('./scoringService'); // Import scoring service
+const scoringService = require('./nutritionScoringService'); // Import scoring service
 
 // Enhanced Analyze Heart Rate
 const analyzeHeartRate = async (userId, cycles) => {

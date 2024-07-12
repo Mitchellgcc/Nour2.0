@@ -1,7 +1,6 @@
 // backend/app.js
 
 require('dotenv').config();
-
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -20,6 +19,10 @@ const userRoutes = require('./routes/userRoutes');
 const mealUploadController = require('./controllers/mealUploadController');
 const userPreferencesRoutes = require('./routes/userPreferencesRoutes');
 const userFeedbackRoutes = require('./routes/userFeedbackRoutes');
+const conversationRoutes = require('./routes/conversationRoutes');
+const nextMealRoutes = require('./routes/nextMealRoutes');
+const nourScoreRoutes = require('./routes/nourScoreRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 
 console.log('Environment variables loaded:');
 console.log('POSTGRESQL_URI:', process.env.POSTGRESQL_URI);
@@ -31,7 +34,6 @@ console.log('WHOOP_API_BASE_URL:', process.env.WHOOP_API_BASE_URL);
 
 const app = express();
 
-// Establish database connections
 (async () => {
     try {
         await sequelize.authenticate();
@@ -44,8 +46,19 @@ const app = express();
 })();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3001',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-refresh-token'],
+}));
 app.use(morgan('dev'));
+
+// Log incoming requests
+app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.url}`);
+    next();
+});
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -63,10 +76,13 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/meals', mealRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/whoop', whoopRoutes);
-app.use('/api/users', userRoutes); // Corrected the endpoint path
+app.use('/api/users', userRoutes);
 app.post('/api/mealUpload', mealUploadController.handleMealUpload);
 app.use('/api/user/preferences', userPreferencesRoutes);
 app.use('/api/user/feedback', userFeedbackRoutes);
+app.use('/api/next-meal', nextMealRoutes);
+app.use('/api/nour-score', nourScoreRoutes);
+app.use('/api', notificationRoutes);
 
 app.get('/dashboard', (req, res) => {
     if (req.isAuthenticated()) {
@@ -82,6 +98,7 @@ app.get('/', (req, res) => {
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
+    console.error('Error:', err);
     res.status(statusCode).json({
         message: err.message,
         stack: process.env.NODE_ENV === 'production' ? '🥞' : err.stack,

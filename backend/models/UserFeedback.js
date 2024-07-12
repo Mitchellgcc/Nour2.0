@@ -15,7 +15,7 @@ const userFeedbackSchema = new Schema({
     type: Number,
     min: 1,
     max: 5,
-    required: true,  // Ensure rating is required
+    required: true,
   },
   comments: {
     type: String,
@@ -24,8 +24,31 @@ const userFeedbackSchema = new Schema({
   mealId: {
     type: Schema.Types.ObjectId,
     ref: 'Meal',
-    required: true,  // Ensure mealId is required
+    required: true,
   },
+  taste: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: false
+  },
+  portionSize: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: false
+  },
+  satisfaction: {
+    type: Number,
+    min: 1,
+    max: 5,
+    required: false
+  },
+  context: {
+    type: String,
+    enum: ['post-workout', 'during travel', 'regular meal'],
+    required: false
+  }
 }, { timestamps: true });
 
 // Create UserFeedback model

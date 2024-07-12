@@ -8,6 +8,9 @@ const whoopDataSchema = new mongoose.Schema({
   recoveries: { type: Array, required: true },
   sleepData: { type: Array, required: true },
   workouts: { type: Array, required: true },
+  steps: { type: Number, required: false },
+  distance: { type: Number, required: false },
+  activeMinutes: { type: Number, required: false },
 }, { timestamps: true });
 
 const WhoopData = mongoose.models.WhoopData || mongoose.model('WhoopData', whoopDataSchema);

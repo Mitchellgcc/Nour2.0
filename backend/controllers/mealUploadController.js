@@ -4,7 +4,7 @@ const axios = require('axios');
 const path = require('path');
 const { connectToMongoDB } = require('../utils/dbUtils');
 const { isValidAnalysisResult, parseAndConvertAnalysisResult } = require('../utils/validationUtils');
-const scoringService = require('../services/scoringService');
+const scoringService = require('../services/nutritionScoringService');
 const isTesting = process.env.NODE_ENV === 'test';
 
 function handleError(res, error, message = 'An error occurred') {

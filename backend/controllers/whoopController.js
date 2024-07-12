@@ -1,6 +1,8 @@
+// backend/controllers/whoopController.js
 const axios = require('axios');
 const querystring = require('querystring');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { 
   fetchProfile, 
   fetchCycles, 
@@ -21,6 +23,16 @@ const logStep = (message, context) => {
 const loginUser = async (email, password) => {
   try {
     logStep('Attempting to log in user', { email });
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new Error('Invalid password');
+    }
+
     const response = await axios.post('http://localhost:5001/api/auth/login', {
       email,
       password,
@@ -194,7 +206,9 @@ const handleRedirect = async (req, res) => {
 
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-      res.redirect(`/profile?token=${token}`);
+      // Update the redirect to connect-apps
+      logStep('Redirecting user to connect-apps', { userId: user.id });
+      res.redirect(`http://localhost:3001/connect-apps?token=${token}`);
     } else {
       logStep('User not found for session ID', { state });
       res.status(404).json({ message: 'User not found' });

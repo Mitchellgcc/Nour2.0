@@ -198,10 +198,10 @@ const fetchWorkouts = async (accessToken, userId) => {
 };
 
 module.exports = {
+  refreshWhoopToken,
   fetchProfile,
   fetchCycles,
   fetchRecoveries,
   fetchSleepData,
   fetchWorkouts,
-  refreshWhoopToken,
 };

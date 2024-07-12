@@ -1,7 +1,6 @@
-// backend/controllers/userController.js
-
 const User = require('../models/User');
 
+// Create user
 const createUser = async (req, res) => {
   console.log('Creating a new user with data:', req.body);
   try {
@@ -14,22 +13,24 @@ const createUser = async (req, res) => {
   }
 };
 
+// Get user by ID
 const getUserById = async (req, res) => {
-  console.log('Getting user by ID:', req.params.id);
   try {
-    const user = await User.findByPk(req.params.id);
+    const userId = req.params.userId;
+    console.log(`Getting user by ID: ${userId}`);
+    const user = await User.findByPk(userId);
     if (!user) {
-      console.log('User not found');
+      console.log(`User not found: ${userId}`);
       return res.status(404).json({ message: 'User not found' });
     }
     res.status(200).json(user);
-    console.log('User retrieved:', user);
   } catch (error) {
     console.error('Error getting user:', error);
     res.status(500).json({ message: 'Internal server error', error });
   }
 };
 
+// Get all users
 const getAllUsers = async (req, res) => {
   console.log('Getting all users');
   try {
@@ -42,6 +43,7 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+// Update user
 const updateUser = async (req, res) => {
   console.log('Updating user by ID:', req.params.id);
   console.log('Update data:', req.body);
@@ -60,6 +62,7 @@ const updateUser = async (req, res) => {
   }
 };
 
+// Delete user
 const deleteUser = async (req, res) => {
   console.log('Deleting user by ID:', req.params.id);
   try {
@@ -77,6 +80,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// Check user token
 const checkUserToken = async (req, res) => {
   console.log('Checking user token for email:', req.body.email);
   try {
@@ -93,11 +97,84 @@ const checkUserToken = async (req, res) => {
   }
 };
 
+// Get user profile
+const getUserProfile = async (req, res) => {
+  try {
+    console.log('Getting user profile for ID:', req.user.id);
+    const user = await User.findByPk(req.user.id, {
+      attributes: ['id', 'firstName', 'lastName', 'email', 'profileImage', 'timeZone', 'height', 'weight', 'gender', 'dateOfBirth', 'bodyComposition']
+    });
+    if (!user) {
+      console.log('User not found');
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error getting user profile:', error);
+    res.status(500).json({ message: 'Internal server error', error });
+  }
+};
+
+
+// Get user notifications
+const getUserNotifications = async (req, res) => {
+  try {
+    console.log('Fetching notifications for user ID:', req.user.id);
+    const user = await User.findByPk(req.user.id);
+
+    if (!user) {
+      console.log('User not found for ID:', req.user.id);
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    console.log('User found:', user.dataValues);
+
+    const notifications = user.notifications || [];
+    console.log('User notifications:', notifications);
+
+    res.status(200).json({ notifications });
+  } catch (error) {
+    console.error('Error fetching notifications:', error);
+
+    // Detailed error logging
+    if (error instanceof ValidationError) {
+      console.error('Validation error:', error.errors);
+    } else if (error instanceof DatabaseError) {
+      console.error('Database error:', error.message);
+    }
+
+    res.status(500).json({ message: 'Internal server error', error });
+  }
+};
+
+// Mark notification as read
+const markNotificationAsRead = async (req, res) => {
+  const { notificationId } = req.body;
+  try {
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.notifications = user.notifications.map(notification =>
+      notification.notificationId === notificationId
+        ? { ...notification, isRead: true }
+        : notification
+    );
+    await user.save();
+    res.status(200).json({ message: 'Notification marked as read' });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error', error });
+  }
+};
+
 module.exports = {
   createUser,
   getUserById,
   getAllUsers,
   updateUser,
   deleteUser,
-  checkUserToken
+  checkUserToken,
+  getUserProfile,
+  getUserNotifications,
+  markNotificationAsRead
 };

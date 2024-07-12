@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const UserFeedback = require('../models/UserFeedback');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // POST endpoint to collect user feedback
-router.post('/feedback', async (req, res) => {
-  const { userId, mealId, rating, comments } = req.body;
+router.post('/feedback', authMiddleware, async (req, res) => {
+  const { mealId, rating, comments } = req.body;
+  const userId = req.user.id;
 
   if (!userId || !mealId || !rating) {
     return res.status(400).json({ message: 'userId, mealId, and rating are required' });
@@ -26,7 +28,7 @@ router.post('/feedback', async (req, res) => {
 });
 
 // GET endpoint to retrieve feedback for a meal
-router.get('/feedback/:mealId', async (req, res) => {
+router.get('/feedback/:mealId', authMiddleware, async (req, res) => {
   const { mealId } = req.params;
 
   try {

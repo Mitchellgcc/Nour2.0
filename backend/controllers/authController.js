@@ -12,10 +12,24 @@ const generateTokens = (user) => {
 
 // Register user
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { firstName, lastName, email, password, dateOfBirth, height, weight, gender } = req.body;
+  if (!firstName || !lastName || !email || !password || !dateOfBirth || !height || !weight || !gender) {
+    return res.status(400).json({ message: 'Validation error: All fields are required' });
+  }
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, email: email.toLowerCase(), password: hashedPassword });
+    const user = await User.create({
+      firstName,
+      lastName,
+      email: email.toLowerCase(),
+      password: hashedPassword,
+      dateOfBirth,
+      height,
+      weight,
+      gender,
+      profileImage: '', // Default or placeholder profile image
+      timeZone: '', // Default or placeholder time zone
+    });
     const { accessToken, refreshToken } = generateTokens(user);
     res.status(201).json({ accessToken, refreshToken });
   } catch (error) {
@@ -26,6 +40,9 @@ exports.register = async (req, res) => {
 // Login user
 exports.login = async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Validation error: All fields are required' });
+  }
   try {
     const user = await User.findOne({
       where: {
@@ -46,7 +63,6 @@ exports.login = async (req, res) => {
 
     const { accessToken, refreshToken } = generateTokens(user);
 
-    // Save the session ID to the user's record
     user.sessionId = req.sessionID;
     await user.save();
 
@@ -58,27 +74,33 @@ exports.login = async (req, res) => {
 };
 
 // Refresh token
-exports.refreshToken = (req, res) => {
-  const { refreshToken } = req.cookies;
+exports.refreshToken = async (req, res) => {
+  const { token: refreshToken } = req.body;
+
+  console.log('Received refresh token request:', refreshToken);
 
   if (!refreshToken) {
+    console.error('Refresh token missing');
     return res.status(403).json({ message: 'Refresh token missing' });
   }
 
   jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, async (err, decoded) => {
     if (err) {
+      console.error('Invalid refresh token:', err);
       return res.status(403).json({ message: 'Invalid refresh token' });
     }
 
     const user = await User.findByPk(decoded.id);
     if (!user) {
+      console.error('User not found for decoded token id:', decoded.id);
       return res.status(403).json({ message: 'User not found' });
     }
 
     const { accessToken, refreshToken: newRefreshToken } = generateTokens(user);
 
-    res.cookie('refreshToken', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'Strict' });
-    res.json({ accessToken });
+    console.log('Generated new tokens:', { accessToken, newRefreshToken });
+
+    res.json({ accessToken, refreshToken: newRefreshToken });
   });
 };
 

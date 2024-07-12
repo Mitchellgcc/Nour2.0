@@ -1,0 +1,2 @@
+npm start > console_log.txt 2>&1
+npm test > console_log.txt 2>&1

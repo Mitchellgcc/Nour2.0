@@ -321,9 +321,7 @@
 <a name='L256'></a><a href='#L256'>256</a>
 <a name='L257'></a><a href='#L257'>257</a>
 <a name='L258'></a><a href='#L258'>258</a>
-<a name='L259'></a><a href='#L259'>259</a>
-<a name='L260'></a><a href='#L260'>260</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L259'></a><a href='#L259'>259</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -581,264 +579,263 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// backend/controllers/mealController.js
-const Meal = require('../models/Meal');
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Meal = require('../models/Meal');
 &nbsp;
 // Helper function to validate UUID
 const validateUUID = <span class="fstat-no" title="function not covered" >(i</span>d) =&gt; {
-  const regex = <span class="cstat-no" title="statement not covered" >/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;</span>
-<span class="cstat-no" title="statement not covered" >  return regex.test(id);</span>
+    const regex = <span class="cstat-no" title="statement not covered" >/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;</span>
+<span class="cstat-no" title="statement not covered" >    return regex.test(id);</span>
 };
 &nbsp;
 // Get all meals
 const getMeals = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const meals = <span class="cstat-no" title="statement not covered" >await Meal.findAll({ where: { userId: req.user.id } });</span>
-<span class="cstat-no" title="statement not covered" >    res.status(200).json(meals);</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ message: error.message });</span>
-  }
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        const meals = <span class="cstat-no" title="statement not covered" >await Meal.findAll({ where: { userId: req.user.id } });</span>
+<span class="cstat-no" title="statement not covered" >        res.status(200).json(meals);</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >        res.status(500).json({ message: error.message });</span>
+    }
 };
 &nbsp;
 // Get single meal
 const getMeal = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const mealId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
-<span class="cstat-no" title="statement not covered" >    if (!validateUUID(mealId)) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).json({ message: 'Meal not found' });</span>
-    }
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        const mealId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
+<span class="cstat-no" title="statement not covered" >        if (!validateUUID(mealId)) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json({ message: 'Meal not found' });</span>
+        }
 &nbsp;
-    const meal = <span class="cstat-no" title="statement not covered" >await Meal.findByPk(mealId);</span>
-<span class="cstat-no" title="statement not covered" >    if (!meal || meal.userId !== req.user.id) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).json({ message: 'Meal not found' });</span>
+        const meal = <span class="cstat-no" title="statement not covered" >await Meal.findByPk(mealId);</span>
+<span class="cstat-no" title="statement not covered" >        if (!meal || meal.userId !== req.user.id) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json({ message: 'Meal not found' });</span>
+        }
+<span class="cstat-no" title="statement not covered" >        res.status(200).json(meal);</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >        res.status(500).json({ message: error.message });</span>
     }
-<span class="cstat-no" title="statement not covered" >    res.status(200).json(meal);</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ message: error.message });</span>
-  }
 };
 &nbsp;
 // Create new meal
 const createMeal = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const {
-      name,
-      description,
-      calories,
-      protein,
-      carbs,
-      fat,
-      micronutrients,
-      vitamins,
-      minerals,
-      glycemicIndex,
-      glycemicLoad,
-      waterContent,
-      omega3,
-      omega6,
-      polyphenols,
-      antioxidants,
-      solubleFiber,
-      insolubleFiber,
-      sodium,
-      cholesterol,
-      fiber,
-      sugar
-    } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        const {
+            name,
+            description,
+            calories,
+            protein,
+            carbs,
+            fat,
+            micronutrients,
+            vitamins,
+            minerals,
+            glycemicIndex,
+            glycemicLoad,
+            waterContent,
+            omega3,
+            omega6,
+            polyphenols,
+            antioxidants,
+            solubleFiber,
+            insolubleFiber,
+            sodium,
+            cholesterol,
+            fiber,
+            sugar
+        } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!name || !calories || !protein || !carbs || !fat) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(400).json({ message: 'Missing required fields' });</span>
+<span class="cstat-no" title="statement not covered" >        if (!name || !calories || !protein || !carbs || !fat) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).json({ message: 'Missing required fields' });</span>
+        }
+&nbsp;
+        const meal = <span class="cstat-no" title="statement not covered" >await Meal.create({</span>
+            name,
+            description,
+            calories,
+            protein,
+            carbs,
+            fat,
+            micronutrients,
+            vitamins,
+            minerals,
+            glycemicIndex,
+            glycemicLoad,
+            waterContent,
+            omega3,
+            omega6,
+            polyphenols,
+            antioxidants,
+            solubleFiber,
+            insolubleFiber,
+            sodium,
+            cholesterol,
+            fiber,
+            sugar,
+            userId: req.user.id
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        res.status(201).json(meal);</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >        res.status(500).json({ message: error.message });</span>
     }
-&nbsp;
-    const meal = <span class="cstat-no" title="statement not covered" >await Meal.create({</span>
-      name,
-      description,
-      calories,
-      protein,
-      carbs,
-      fat,
-      micronutrients,
-      vitamins,
-      minerals,
-      glycemicIndex,
-      glycemicLoad,
-      waterContent,
-      omega3,
-      omega6,
-      polyphenols,
-      antioxidants,
-      solubleFiber,
-      insolubleFiber,
-      sodium,
-      cholesterol,
-      fiber,
-      sugar,
-      userId: req.user.id
-    });
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    res.status(201).json(meal);</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ message: error.message });</span>
-  }
 };
 &nbsp;
 // Update meal
 const updateMeal = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const mealId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
-    const {
-      name,
-      description,
-      calories,
-      protein,
-      carbs,
-      fat,
-      micronutrients,
-      vitamins,
-      minerals,
-      glycemicIndex,
-      glycemicLoad,
-      waterContent,
-      omega3,
-      omega6,
-      polyphenols,
-      antioxidants,
-      solubleFiber,
-      insolubleFiber,
-      sodium,
-      cholesterol,
-      fiber,
-      sugar
-    } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        const mealId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
+        const {
+            name,
+            description,
+            calories,
+            protein,
+            carbs,
+            fat,
+            micronutrients,
+            vitamins,
+            minerals,
+            glycemicIndex,
+            glycemicLoad,
+            waterContent,
+            omega3,
+            omega6,
+            polyphenols,
+            antioxidants,
+            solubleFiber,
+            insolubleFiber,
+            sodium,
+            cholesterol,
+            fiber,
+            sugar
+        } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!validateUUID(mealId)) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).json({ message: 'Meal not found' });</span>
+<span class="cstat-no" title="statement not covered" >        if (!validateUUID(mealId)) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json({ message: 'Meal not found' });</span>
+        }
+&nbsp;
+        const meal = <span class="cstat-no" title="statement not covered" >await Meal.findByPk(mealId);</span>
+<span class="cstat-no" title="statement not covered" >        if (!meal || meal.userId !== req.user.id) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json({ message: 'Meal not found' });</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        meal.name = name || meal.name;</span>
+<span class="cstat-no" title="statement not covered" >        meal.description = description || meal.description;</span>
+<span class="cstat-no" title="statement not covered" >        meal.calories = calories || meal.calories;</span>
+<span class="cstat-no" title="statement not covered" >        meal.protein = protein || meal.protein;</span>
+<span class="cstat-no" title="statement not covered" >        meal.carbs = carbs || meal.carbs;</span>
+<span class="cstat-no" title="statement not covered" >        meal.fat = fat || meal.fat;</span>
+<span class="cstat-no" title="statement not covered" >        meal.micronutrients = micronutrients || meal.micronutrients;</span>
+<span class="cstat-no" title="statement not covered" >        meal.vitamins = vitamins || meal.vitamins;</span>
+<span class="cstat-no" title="statement not covered" >        meal.minerals = minerals || meal.minerals;</span>
+<span class="cstat-no" title="statement not covered" >        meal.glycemicIndex = glycemicIndex || meal.glycemicIndex;</span>
+<span class="cstat-no" title="statement not covered" >        meal.glycemicLoad = glycemicLoad || meal.glycemicLoad;</span>
+<span class="cstat-no" title="statement not covered" >        meal.waterContent = waterContent || meal.waterContent;</span>
+<span class="cstat-no" title="statement not covered" >        meal.omega3 = omega3 || meal.omega3;</span>
+<span class="cstat-no" title="statement not covered" >        meal.omega6 = omega6 || meal.omega6;</span>
+<span class="cstat-no" title="statement not covered" >        meal.polyphenols = polyphenols || meal.polyphenols;</span>
+<span class="cstat-no" title="statement not covered" >        meal.antioxidants = antioxidants || meal.antioxidants;</span>
+<span class="cstat-no" title="statement not covered" >        meal.solubleFiber = solubleFiber || meal.solubleFiber;</span>
+<span class="cstat-no" title="statement not covered" >        meal.insolubleFiber = insolubleFiber || meal.insolubleFiber;</span>
+<span class="cstat-no" title="statement not covered" >        meal.sodium = sodium || meal.sodium;</span>
+<span class="cstat-no" title="statement not covered" >        meal.cholesterol = cholesterol || meal.cholesterol;</span>
+<span class="cstat-no" title="statement not covered" >        meal.fiber = fiber || meal.fiber;</span>
+<span class="cstat-no" title="statement not covered" >        meal.sugar = sugar || meal.sugar;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        await meal.save();</span>
+<span class="cstat-no" title="statement not covered" >        res.status(200).json(meal);</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >        res.status(500).json({ message: error.message });</span>
     }
-&nbsp;
-    const meal = <span class="cstat-no" title="statement not covered" >await Meal.findByPk(mealId);</span>
-<span class="cstat-no" title="statement not covered" >    if (!meal || meal.userId !== req.user.id) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).json({ message: 'Meal not found' });</span>
-    }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    meal.name = name || meal.name;</span>
-<span class="cstat-no" title="statement not covered" >    meal.description = description || meal.description;</span>
-<span class="cstat-no" title="statement not covered" >    meal.calories = calories || meal.calories;</span>
-<span class="cstat-no" title="statement not covered" >    meal.protein = protein || meal.protein;</span>
-<span class="cstat-no" title="statement not covered" >    meal.carbs = carbs || meal.carbs;</span>
-<span class="cstat-no" title="statement not covered" >    meal.fat = fat || meal.fat;</span>
-<span class="cstat-no" title="statement not covered" >    meal.micronutrients = micronutrients || meal.micronutrients;</span>
-<span class="cstat-no" title="statement not covered" >    meal.vitamins = vitamins || meal.vitamins;</span>
-<span class="cstat-no" title="statement not covered" >    meal.minerals = minerals || meal.minerals;</span>
-<span class="cstat-no" title="statement not covered" >    meal.glycemicIndex = glycemicIndex || meal.glycemicIndex;</span>
-<span class="cstat-no" title="statement not covered" >    meal.glycemicLoad = glycemicLoad || meal.glycemicLoad;</span>
-<span class="cstat-no" title="statement not covered" >    meal.waterContent = waterContent || meal.waterContent;</span>
-<span class="cstat-no" title="statement not covered" >    meal.omega3 = omega3 || meal.omega3;</span>
-<span class="cstat-no" title="statement not covered" >    meal.omega6 = omega6 || meal.omega6;</span>
-<span class="cstat-no" title="statement not covered" >    meal.polyphenols = polyphenols || meal.polyphenols;</span>
-<span class="cstat-no" title="statement not covered" >    meal.antioxidants = antioxidants || meal.antioxidants;</span>
-<span class="cstat-no" title="statement not covered" >    meal.solubleFiber = solubleFiber || meal.solubleFiber;</span>
-<span class="cstat-no" title="statement not covered" >    meal.insolubleFiber = insolubleFiber || meal.insolubleFiber;</span>
-<span class="cstat-no" title="statement not covered" >    meal.sodium = sodium || meal.sodium;</span>
-<span class="cstat-no" title="statement not covered" >    meal.cholesterol = cholesterol || meal.cholesterol;</span>
-<span class="cstat-no" title="statement not covered" >    meal.fiber = fiber || meal.fiber;</span>
-<span class="cstat-no" title="statement not covered" >    meal.sugar = sugar || meal.sugar;</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    await meal.save();</span>
-<span class="cstat-no" title="statement not covered" >    res.status(200).json(meal);</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ message: error.message });</span>
-  }
 };
 &nbsp;
 // Delete meal
 const deleteMeal = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const mealId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
-<span class="cstat-no" title="statement not covered" >    if (!validateUUID(mealId)) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).json({ message: 'Meal not found' });</span>
-    }
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        const mealId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
+<span class="cstat-no" title="statement not covered" >        if (!validateUUID(mealId)) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json({ message: 'Meal not found' });</span>
+        }
 &nbsp;
-    const meal = <span class="cstat-no" title="statement not covered" >await Meal.findByPk(mealId);</span>
-<span class="cstat-no" title="statement not covered" >    if (!meal || meal.userId !== req.user.id) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(404).json({ message: 'Meal not found' });</span>
+        const meal = <span class="cstat-no" title="statement not covered" >await Meal.findByPk(mealId);</span>
+<span class="cstat-no" title="statement not covered" >        if (!meal || meal.userId !== req.user.id) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json({ message: 'Meal not found' });</span>
+        }
+<span class="cstat-no" title="statement not covered" >        await meal.destroy();</span>
+<span class="cstat-no" title="statement not covered" >        res.status(200).json({ message: 'Meal deleted successfully' });</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >        res.status(500).json({ message: error.message });</span>
     }
-<span class="cstat-no" title="statement not covered" >    await meal.destroy();</span>
-<span class="cstat-no" title="statement not covered" >    res.status(200).json({ message: 'Meal deleted successfully' });</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ message: error.message });</span>
-  }
 };
 &nbsp;
 // Log a new meal with detailed nutrition info
 const logMeal = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const {
-      name,
-      calories,
-      protein,
-      carbs,
-      fat,
-      micronutrients,
-      vitamins,
-      minerals,
-      glycemicIndex,
-      glycemicLoad,
-      waterContent,
-      omega3,
-      omega6,
-      polyphenols,
-      antioxidants,
-      solubleFiber,
-      insolubleFiber,
-      sodium,
-      cholesterol,
-      fiber,
-      sugar
-    } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        const {
+            name,
+            calories,
+            protein,
+            carbs,
+            fat,
+            micronutrients,
+            vitamins,
+            minerals,
+            glycemicIndex,
+            glycemicLoad,
+            waterContent,
+            omega3,
+            omega6,
+            polyphenols,
+            antioxidants,
+            solubleFiber,
+            insolubleFiber,
+            sodium,
+            cholesterol,
+            fiber,
+            sugar
+        } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!name || !calories || !protein || !carbs || !fat) {</span>
-<span class="cstat-no" title="statement not covered" >      return res.status(400).json({ message: 'Missing required fields' });</span>
+<span class="cstat-no" title="statement not covered" >        if (!name || !calories || !protein || !carbs || !fat) {</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).json({ message: 'Missing required fields' });</span>
+        }
+&nbsp;
+        const meal = <span class="cstat-no" title="statement not covered" >await Meal.create({</span>
+            name,
+            calories,
+            protein,
+            carbs,
+            fat,
+            micronutrients,
+            vitamins,
+            minerals,
+            glycemicIndex,
+            glycemicLoad,
+            waterContent,
+            omega3,
+            omega6,
+            polyphenols,
+            antioxidants,
+            solubleFiber,
+            insolubleFiber,
+            sodium,
+            cholesterol,
+            fiber,
+            sugar,
+            userId: req.user.id
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        res.status(201).json(meal);</span>
+    } catch (error) {
+<span class="cstat-no" title="statement not covered" >        res.status(500).json({ error: error.message });</span>
     }
-&nbsp;
-    const meal = <span class="cstat-no" title="statement not covered" >await Meal.create({</span>
-      name,
-      calories,
-      protein,
-      carbs,
-      fat,
-      micronutrients,
-      vitamins,
-      minerals,
-      glycemicIndex,
-      glycemicLoad,
-      waterContent,
-      omega3,
-      omega6,
-      polyphenols,
-      antioxidants,
-      solubleFiber,
-      insolubleFiber,
-      sodium,
-      cholesterol,
-      fiber,
-      sugar,
-      userId: req.user.id
-    });
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    res.status(201).json(meal);</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    res.status(500).json({ error: error.message });</span>
-  }
 };
 &nbsp;
 // Export all the defined functions
 module.exports = {
-  getMeals,
-  getMeal,
-  createMeal,
-  updateMeal,
-  deleteMeal,
-  logMeal
+    getMeals,
+    getMeal,
+    createMeal,
+    updateMeal,
+    deleteMeal,
+    logMeal
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -847,7 +844,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-25T12:04:14.165Z
+                at 2024-07-08T14:45:34.273Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

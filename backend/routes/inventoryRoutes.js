@@ -2,6 +2,7 @@
 
 const express = require('express');
 const { getInventory, getInventoryItem, createInventoryItem, updateInventoryItem, deleteInventoryItem } = require('../controllers/inventoryController');
+const { handleInventoryUpload } = require('../controllers/inventoryUploadController'); 
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
@@ -20,5 +21,8 @@ router.put('/:id', authMiddleware, updateInventoryItem);
 
 // Delete inventory item
 router.delete('/:id', authMiddleware, deleteInventoryItem);
+
+// Upload inventory data
+router.post('/upload', authMiddleware, handleInventoryUpload);
 
 module.exports = router;

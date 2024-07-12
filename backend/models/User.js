@@ -1,5 +1,3 @@
-// backend/models/User.js
-
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
@@ -9,7 +7,11 @@ const User = sequelize.define('User', {
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
-  name: {
+  firstName: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  lastName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -21,6 +23,18 @@ const User = sequelize.define('User', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  profileImage: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  timeZone: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  notifications: {
+    type: DataTypes.JSON,
+    allowNull: true,
   },
   whoopId: {
     type: DataTypes.STRING,
@@ -56,6 +70,42 @@ const User = sequelize.define('User', {
   },
   healthTrend: {
     type: DataTypes.STRING,
+    allowNull: true,
+  },
+  dateOfBirth: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  height: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  weight: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  gender: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  bodyComposition: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  activityLevel: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  dietHistory: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  healthMetricsTrends: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  realTimeData: {
+    type: DataTypes.JSON,
     allowNull: true,
   },
 }, {

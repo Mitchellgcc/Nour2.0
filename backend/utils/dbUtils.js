@@ -1,26 +1,44 @@
 // backend/utils/dbUtils.js
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
-const mongoClient = new MongoClient(process.env.MONGODB_URI, { 
-  serverSelectionTimeoutMS: 30000 
-});
-let dbClient;
+let mongoClient;
 
-async function connectToMongoDB() {
-  if (!dbClient) {
-    dbClient = await mongoClient.connect();
-    console.log('Connected to MongoDB');
+const connect = async (uri) => {
+  if (uri) {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+  } else {
+    if (!mongoClient) {
+      mongoClient = await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      console.log('Connected to MongoDB');
+    }
   }
-  return dbClient.db('Nour2');
-}
+};
 
-async function closeConnection() {
-  if (dbClient) {
-    await dbClient.close();
-    dbClient = null;
-    console.log('MongoDB connection closed');
+const clearDatabase = async () => {
+  const collections = mongoose.connection.collections;
+
+  for (const key in collections) {
+    const collection = collections[key];
+    await collection.deleteMany({});
   }
-}
+};
 
-module.exports = { connectToMongoDB, closeConnection };
+const closeDatabase = async () => {
+  await mongoose.connection.dropDatabase();
+  await mongoose.connection.close();
+  mongoClient = null;
+  console.log('MongoDB connection closed');
+};
+
+module.exports = {
+  connect,
+  clearDatabase,
+  closeDatabase,
+};

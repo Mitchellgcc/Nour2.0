@@ -1,25 +1,30 @@
-// backend/routes/userRoutes.js
-
 const express = require('express');
-const { createUser, getUserById, getAllUsers, updateUser, deleteUser, checkUserToken } = require('../controllers/userController');
+const {
+  createUser,
+  getUserById,
+  getAllUsers,
+  updateUser,
+  deleteUser,
+  checkUserToken,
+  getUserProfile,
+  getUserNotifications,
+  markNotificationAsRead
+} = require('../controllers/userController');
+const authMiddleware = require('../middlewares/authMiddleware');
+
 const router = express.Router();
 
-// Create a new user
-router.post('/', createUser);
-
-// Read user by ID
-router.get('/:id', getUserById);
-
-// Read all users
-router.get('/', getAllUsers);
-
-// Update user by ID
-router.put('/:id', updateUser);
-
-// Delete user by ID
-router.delete('/:id', deleteUser);
-
-// Check user token
+// Static routes first
 router.post('/check-token', checkUserToken);
+router.get('/profile', authMiddleware, getUserProfile);
+router.get('/notifications', authMiddleware, getUserNotifications);
+router.post('/notifications/mark-read', authMiddleware, markNotificationAsRead);
+
+// Dynamic routes
+router.post('/', createUser);
+router.get('/:id', getUserById);
+router.get('/', getAllUsers);
+router.put('/:id', updateUser);
+router.delete('/:id', deleteUser);
 
 module.exports = router;
