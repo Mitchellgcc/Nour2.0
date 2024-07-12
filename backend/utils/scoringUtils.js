@@ -9,23 +9,23 @@ const calculateMaintenanceCalories = (user) => {
 
   let bmr;
 
-  if (gender === 'male') {
+  if (gender === 'Male') {
     bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
-  } else if (gender === 'female') {
+  } else if (gender === 'Female') {
     bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
   } else {
     throw new Error('Invalid gender');
   }
 
   const activityFactors = {
-    sedentary: 1.2,
-    lightly_active: 1.375,
-    moderately_active: 1.55,
-    very_active: 1.725,
-    super_active: 1.9
+    Sedentary: 1.2,
+    LightlyActive: 1.375,
+    ModeratelyActive: 1.55,
+    VeryActive: 1.725,
+    SuperActive: 1.9
   };
 
-  const maintenanceCalories = bmr * (activityFactors[activityLevel] || activityFactors['sedentary']);
+  const maintenanceCalories = bmr * (activityFactors[activityLevel] || activityFactors['Sedentary']);
 
   console.log(`Maintenance Calories for user: ${maintenanceCalories}`);
   return Math.round(maintenanceCalories);

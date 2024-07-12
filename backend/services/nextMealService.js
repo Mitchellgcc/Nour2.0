@@ -1,10 +1,11 @@
 const User = require('../models/User');
 const UserPreferences = require('../models/UserPreferences');
-const NutritionalData = require('../models/NutritionalData');
+const { NutritionalData } = require('../models/NutritionalData');
 const WhoopData = require('../models/WhoopData');
 const EnhancedData = require('../models/EnhancedData');
 const axios = require('axios');
 const logger = require('../config/logger');
+const Meal = require('../models/Meal');
 require('dotenv').config();
 
 const openaiApiKey = process.env.OPENAI_API_KEY;
@@ -13,15 +14,24 @@ const aggregateUserData = async (userId) => {
     try {
         logger.info(`Aggregating data for user ${userId}`);
         const user = await User.findOne({ where: { id: userId } });
+        logger.info('User data:', user);
+
         const userPreferences = await UserPreferences.findOne({ where: { userId } });
+        logger.info('User preferences:', userPreferences);
+
         const nutritionalData = await NutritionalData.findAll({ where: { userId }, order: [['date', 'DESC']], limit: 1 });
+        logger.info('Nutritional data:', nutritionalData);
+
         const whoopData = await WhoopData.findOne({ where: { userId } });
+        logger.info('Whoop data:', whoopData);
+
         const enhancedData = await EnhancedData.findOne({ where: { userId } });
+        logger.info('Enhanced data:', enhancedData);
 
         const aggregatedData = {
             user,
             userPreferences,
-            nutritionalData: nutritionalData[0] || {}, 
+            nutritionalData: nutritionalData[0] || {},
             whoopData,
             enhancedData
         };
@@ -39,7 +49,7 @@ const getMealRecommendations = async (userData) => {
         logger.info('Generating GPT prompt...');
         const prompt = generatePrompt(userData);
         logger.info('GPT prompt generated:', prompt);
-        
+
         const response = await axios.post('https://api.openai.com/v1/chat/completions', {
             model: "gpt-3.5-turbo-instruct",
             messages: [{ role: "system", content: "You are a meal planning assistant." }, { role: "user", content: prompt }],
@@ -127,14 +137,22 @@ const generatePrompt = (userData) => {
 
 const fetchAndDisplayNewMeal = async (userId) => {
     try {
-        logger.info(`Fetching and displaying new meal for user ID: ${userId}`);
+        logger.info(`Fetching new meal for user ${userId}`);
         const userData = await aggregateUserData(userId);
-        const recommendedMeal = await getMealRecommendations(userData);
-        saveNextMealData(recommendedMeal);
-        logger.info('New meal fetched and displayed:', recommendedMeal);
-        return recommendedMeal;
+        logger.info(`User data aggregated for user ${userId}:`, userData);
+
+        const mealRecommendations = await getMealRecommendations(userData);
+        logger.info(`Meal recommendations for user ${userId}:`, mealRecommendations);
+
+        if (!mealRecommendations || mealRecommendations.length === 0) {
+            throw new Error('No meal recommendations available');
+        }
+
+        const meal = mealRecommendations[0]; // Simplified for illustration
+        logger.info(`Returning meal for user ${userId}:`, meal);
+        return meal;
     } catch (error) {
-        logger.error('Error fetching and displaying new meal:', error);
+        logger.error(`Error fetching and displaying new meal for user ${userId}:`, error);
         throw error;
     }
 };
