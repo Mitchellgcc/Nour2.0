@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const UserPreferences = require('../models/UserPreferences');
-const { NutritionalData } = require('../models/NutritionalData');
+const NutritionalData = require('../models/NutritionalData'); // Ensure this is correctly imported
 const WhoopData = require('../models/WhoopData');
 const EnhancedData = require('../models/EnhancedData');
 const axios = require('axios');
@@ -15,23 +15,23 @@ const aggregateUserData = async (userId) => {
         logger.info(`Aggregating data for user ${userId}`);
         const user = await User.findOne({ where: { id: userId } });
         logger.info('User data:', user);
-
+        
         const userPreferences = await UserPreferences.findOne({ where: { userId } });
         logger.info('User preferences:', userPreferences);
-
-        const nutritionalData = await NutritionalData.findAll({ where: { userId }, order: [['date', 'DESC']], limit: 1 });
+        
+        const nutritionalData = await NutritionalData.find({ userId }).sort({ date: -1 }).limit(1);
         logger.info('Nutritional data:', nutritionalData);
-
-        const whoopData = await WhoopData.findOne({ where: { userId } });
+        
+        const whoopData = await WhoopData.findOne({ userId });
         logger.info('Whoop data:', whoopData);
-
-        const enhancedData = await EnhancedData.findOne({ where: { userId } });
+        
+        const enhancedData = await EnhancedData.findOne({ userId });
         logger.info('Enhanced data:', enhancedData);
 
         const aggregatedData = {
             user,
             userPreferences,
-            nutritionalData: nutritionalData[0] || {},
+            nutritionalData: nutritionalData[0] || {}, 
             whoopData,
             enhancedData
         };
@@ -80,8 +80,8 @@ const generatePrompt = (userData) => {
     } = userData;
 
     const userInfo = `
-        Name: ${user.name || 'Unknown'}
-        Age: ${user.age || 'Unknown'}
+        Name: ${user.firstName || 'Unknown'}
+        Age: ${user.dateOfBirth ? new Date().getFullYear() - new Date(user.dateOfBirth).getFullYear() : 'Unknown'}
         Gender: ${user.gender || 'Unknown'}
         Weight: ${user.weight || 'Unknown'}
         Height: ${user.height || 'Unknown'}
@@ -95,11 +95,11 @@ const generatePrompt = (userData) => {
     `;
 
     const nutritionalInfo = `
-        Current Caloric Intake: ${nutritionalData.calories || 'Unknown'} kcal
+        Current Caloric Intake: ${nutritionalData.totalCalories || 'Unknown'} kcal
         Macronutrients: 
-            Protein: ${nutritionalData.protein || 'Unknown'}g
-            Fat: ${nutritionalData.fat || 'Unknown'}g
-            Carbs: ${nutritionalData.carbs || 'Unknown'}g
+            Protein: ${nutritionalData.macronutrients ? nutritionalData.macronutrients.proteins : 'Unknown'}g
+            Fat: ${nutritionalData.macronutrients ? nutritionalData.macronutrients.fats : 'Unknown'}g
+            Carbs: ${nutritionalData.macronutrients ? nutritionalData.macronutrients.carbohydrates : 'Unknown'}g
     `;
 
     const whoopInfo = whoopData ? `

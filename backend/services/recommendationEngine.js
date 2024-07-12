@@ -2,7 +2,7 @@
 
 const WhoopData = require('../models/WhoopData');
 const User = require('../models/User');
-const Meal = require('../models/Meal');
+const { Meal } = require('../models/Meal');
 const {
   analyzeHeartRate,
   analyzeHRV,
@@ -18,7 +18,7 @@ const getRecommendations = async (userId) => {
     const user = await User.findByPk(userId);
     if (!user) throw new Error('User not found');
 
-    const whoopData = await WhoopData.findOne({ userId });
+    const whoopData = await WhoopData.findOne({ where: { userId } });
     const meals = await Meal.findAll({ where: { userId } });
 
     if (!whoopData) {

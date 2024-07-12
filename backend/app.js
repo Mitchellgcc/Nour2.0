@@ -80,7 +80,15 @@ app.use('/api/users', userRoutes);
 app.post('/api/mealUpload', mealUploadController.handleMealUpload);
 app.use('/api/user/preferences', userPreferencesRoutes);
 app.use('/api/user/feedback', userFeedbackRoutes);
-app.use('/api/next-meal', nextMealRoutes);
+app.get('/api/next-meal', async (req, res) => {
+    try {
+      const nextMeal = await getNextMeal(req.user.id); // Assuming req.user is set
+      res.json(nextMeal); // Ensure JSON response
+    } catch (error) {
+      console.error('Error getting next meal:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
 app.use('/api/nour-score', nourScoreRoutes);
 app.use('/api', notificationRoutes);
 
