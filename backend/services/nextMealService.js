@@ -148,7 +148,7 @@ const fetchAndDisplayNewMeal = async (userId) => {
             throw new Error('No meal recommendations available');
         }
 
-        const meal = mealRecommendations[0]; // Simplified for illustration
+        const meal = mealRecommendations[0];
         logger.info(`Returning meal for user ${userId}:`, meal);
         return meal;
     } catch (error) {

@@ -1,5 +1,3 @@
-// backend/services/recommendationEngine.js
-
 const WhoopData = require('../models/WhoopData');
 const User = require('../models/User');
 const { Meal } = require('../models/Meal');
@@ -78,7 +76,7 @@ const getRecommendations = async (userId) => {
 
 async function deriveInsights() {
   try {
-    const whoopData = await WhoopData.find();
+    const whoopData = await WhoopData.findAll(); // Adjusted from find() to findAll()
     for (const data of whoopData) {
       const userId = data.userId;
       console.log(`Processing user ID: ${userId}`);

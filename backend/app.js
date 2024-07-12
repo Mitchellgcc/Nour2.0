@@ -23,6 +23,7 @@ const conversationRoutes = require('./routes/conversationRoutes');
 const nextMealRoutes = require('./routes/nextMealRoutes');
 const nourScoreRoutes = require('./routes/nourScoreRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const { fetchAndDisplayNewMeal } = require('./services/nextMealService'); // Ensure correct import
 
 console.log('Environment variables loaded:');
 console.log('POSTGRESQL_URI:', process.env.POSTGRESQL_URI);
@@ -82,7 +83,7 @@ app.use('/api/user/preferences', userPreferencesRoutes);
 app.use('/api/user/feedback', userFeedbackRoutes);
 app.get('/api/next-meal', async (req, res) => {
     try {
-      const nextMeal = await getNextMeal(req.user.id); // Assuming req.user is set
+      const nextMeal = await fetchAndDisplayNewMeal(req.user.id); // Assuming req.user is set
       res.json(nextMeal); // Ensure JSON response
     } catch (error) {
       console.error('Error getting next meal:', error);

@@ -61,7 +61,7 @@ const NextMealWidget = () => {
     const fetchMeal = async () => {
       try {
         console.log('Starting fetchMeal');
-        const response = await api.get('/next-meal');
+        const response = await api.get('/api/next-meal');
         console.log('Meal data fetched:', response.data);
         setMeal(response.data);
       } catch (error) {
