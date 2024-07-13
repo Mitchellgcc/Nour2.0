@@ -1,3 +1,5 @@
+// backend/services/NourScoreService.js
+
 const {
     calculateMaintenanceCalories,
     calculateCaloricIntakeScore,
@@ -73,7 +75,6 @@ const calculateNourScoreForUser = async (user) => {
         throw error;
     }
 };
-
 
 const getAggregatedDataForUser = async (userId) => {
     return await DataAggregationService.aggregateNutritionalData(userId);

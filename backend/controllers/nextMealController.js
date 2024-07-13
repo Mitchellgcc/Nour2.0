@@ -14,23 +14,25 @@ const logger = require('../config/logger');
 
 const getNextMeal = async (req, res) => {
   try {
-    if (!req.user) {
-      throw new Error('User not authenticated');
-    }
-    const userId = req.user.id;
-    logger.info(`getNextMeal called with userId: ${userId}`);
-    const nextMeal = await fetchAndDisplayNewMeal(userId);
-    logger.info('getNextMeal response:', nextMeal);
-    res.status(200).json(nextMeal);
+      if (!req.user) {
+          console.log('User not authenticated in getNextMeal'); // Add this line to debug
+          throw new Error('User not authenticated');
+      }
+      const userId = req.user.id;
+      logger.info(`getNextMeal called with userId: ${userId}`);
+      const nextMeal = await fetchAndDisplayNewMeal(userId);
+      logger.info('getNextMeal response:', nextMeal);
+      res.status(200).json(nextMeal);
   } catch (error) {
-    logger.error('Error getting next meal:', error);
-    res.status(500).json({ message: 'Error getting next meal' });
+      logger.error('Error getting next meal:', error);
+      res.status(500).json({ message: 'Error getting next meal' });
   }
 };
 
 const handleSwipeMeal = async (req, res) => {
   try {
     if (!req.user) {
+      console.log('User not authenticated in handleSwipeMeal'); // Add this line to debug
       throw new Error('User not authenticated');
     }
     const userId = req.user.id;
@@ -48,6 +50,7 @@ const handleSwipeMeal = async (req, res) => {
 const favoriteMeal = async (req, res) => {
   try {
     if (!req.user) {
+      console.log('User not authenticated in favoriteMeal'); // Add this line to debug
       throw new Error('User not authenticated');
     }
     const userId = req.user.id;
@@ -71,6 +74,7 @@ const favoriteMeal = async (req, res) => {
 const submitMealFeedback = async (req, res) => {
   try {
     if (!req.user) {
+      console.log('User not authenticated in submitMealFeedback'); // Add this line to debug
       throw new Error('User not authenticated');
     }
     const userId = req.user.id;
@@ -94,6 +98,7 @@ const submitMealFeedback = async (req, res) => {
 const getRecommendations = async (req, res) => {
   try {
     if (!req.user) {
+      console.log('User not authenticated in getRecommendations'); // Add this line to debug
       throw new Error('User not authenticated');
     }
     const userId = req.user.id;
@@ -111,6 +116,7 @@ const getRecommendations = async (req, res) => {
 const updateMealPlan = async (req, res) => {
   try {
     if (!req.user) {
+      console.log('User not authenticated in updateMealPlan'); // Add this line to debug
       throw new Error('User not authenticated');
     }
     const userId = req.user.id;
@@ -128,6 +134,7 @@ const updateMealPlan = async (req, res) => {
 const getMealById = async (req, res) => {
   try {
     if (!req.user) {
+      console.log('User not authenticated in getMealById'); // Add this line to debug
       throw new Error('User not authenticated');
     }
     const { id } = req.params;

@@ -61,7 +61,18 @@ const NextMealWidget = () => {
     const fetchMeal = async () => {
       try {
         console.log('Starting fetchMeal');
-        const response = await api.get('/api/next-meal');
+        
+        // Retrieve token from local storage or context
+        const token = localStorage.getItem('accessToken');
+        console.log('Retrieved token:', token);
+
+        const response = await api.get('/api/next-meal', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
         console.log('Meal data fetched:', response.data);
         setMeal(response.data);
       } catch (error) {

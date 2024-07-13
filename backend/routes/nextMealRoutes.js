@@ -1,3 +1,4 @@
+// backend/routes/nextMealRoutes.js
 const express = require('express');
 const router = express.Router();
 const nextMealController = require('../controllers/nextMealController');
@@ -11,9 +12,27 @@ router.use((req, res, next) => {
 });
 
 // Use passport.authenticate middleware
-router.use(passport.authenticate('jwt', { session: false }));
+router.use((req, res, next) => {
+  passport.authenticate('jwt', { session: false }, (err, user, info) => {
+    if (err) {
+      console.error('Error during authentication:', err);
+      return next(err);
+    }
+    if (!user) {
+      console.error('Authentication failed:', info.message);
+      return res.status(400).json({ message: 'User not authenticated' });
+    }
+    console.log('Authentication succeeded:', user);
+    req.user = user;
+    next();
+  })(req, res, next);
+});
 
-router.get('/', nextMealController.getNextMeal);
+router.get('/', (req, res, next) => {
+  console.log('Authenticated User:', req.user); // Add this line to debug
+  next();
+}, nextMealController.getNextMeal);
+
 router.post('/swipe-meal', nextMealController.handleSwipeMeal);
 router.post('/favorite-meal', nextMealController.favoriteMeal);
 router.post('/submit-feedback', nextMealController.submitMealFeedback);

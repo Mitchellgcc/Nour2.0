@@ -121,10 +121,13 @@ const opts = {
 
 passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
     try {
+        console.log('JWT Payload:', jwt_payload); // Add this line to debug
         const user = await User.findByPk(jwt_payload.id);
         if (user) {
+            console.log('User found:', user); // Add this line to debug
             return done(null, user);
         }
+        console.log('User not found'); // Add this line to debug
         return done(null, false);
     } catch (error) {
         console.error('Error in JWT Strategy:', error);

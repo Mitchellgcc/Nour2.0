@@ -83,19 +83,20 @@ app.use('/api/user/preferences', userPreferencesRoutes);
 app.use('/api/user/feedback', userFeedbackRoutes);
 app.get('/api/next-meal', async (req, res) => {
     try {
-      console.log('Request received for /api/next-meal');
-      if (!req.user || !req.user.id) {
-        return res.status(400).json({ message: 'User not authenticated' });
-      }
-  
-      const nextMeal = await fetchAndDisplayNewMeal(req.user.id);
-      console.log('Next meal fetched:', nextMeal);
-      res.json(nextMeal);
+        console.log('Request received for /api/next-meal');
+        if (!req.user || !req.user.id) {
+            console.log('User not authenticated'); // Add this line to debug
+            return res.status(400).json({ message: 'User not authenticated' });
+        }
+
+        const nextMeal = await fetchAndDisplayNewMeal(req.user.id);
+        console.log('Next meal fetched:', nextMeal);
+        res.json(nextMeal);
     } catch (error) {
-      console.error('Error getting next meal:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
+        console.error('Error getting next meal:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
-  });
+});
   
 app.use('/api/nour-score', nourScoreRoutes);
 app.use('/api', notificationRoutes);
