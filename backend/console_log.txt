@@ -10,15 +10,15 @@ WHOOP_CLIENT_SECRET: b38acccd48d5dd6031f5ced87b6eac9a90725e84b5e6f4404b3e6db19d2
 WHOOP_REDIRECT_URI: http://localhost:3001/connect-apps
 WHOOP_API_BASE_URL: https://api.prod.whoop.com
 PostgreSQL URI: postgres://mitchellgcc:Charlie123@localhost:5432/nutrition_app
-(node:35111) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(node:37217) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 PostgreSQL connected
-(node:35111) [MONGODB DRIVER] Warning: useNewUrlParser is a deprecated option: useNewUrlParser has no effect since Node.js Driver version 4.0.0 and will be removed in the next major version
-(node:35111) [MONGODB DRIVER] Warning: useUnifiedTopology is a deprecated option: useUnifiedTopology has no effect since Node.js Driver version 4.0.0 and will be removed in the next major version
+(node:37217) [MONGODB DRIVER] Warning: useNewUrlParser is a deprecated option: useNewUrlParser has no effect since Node.js Driver version 4.0.0 and will be removed in the next major version
+(node:37217) [MONGODB DRIVER] Warning: useUnifiedTopology is a deprecated option: useUnifiedTopology has no effect since Node.js Driver version 4.0.0 and will be removed in the next major version
 Sequelize synced successfully
-[32minfo[39m: Running scheduled job for Whoop data sync {"service":"user-service","timestamp":"2024-07-13 12:28:15"}
+[32minfo[39m: Running scheduled job for Whoop data sync {"service":"user-service","timestamp":"2024-07-13 13:28:41"}
 Server running on port 5001
-[32minfo[39m: User abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1 does not have a valid Whoop access token. {"service":"user-service","timestamp":"2024-07-13 12:28:15"}
+[32minfo[39m: User abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1 does not have a valid Whoop access token. {"service":"user-service","timestamp":"2024-07-13 13:28:41"}
 MongoDB connected
 Processing user ID: 4495835d-8ae5-40f6-85b0-c8d2c309172b
 User not found: 4495835d-8ae5-40f6-85b0-c8d2c309172b
@@ -33,23 +33,25 @@ Error in deriveInsights: Error: Whoop data not found
     at async deriveInsights (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/recommendationEngine.js:86:7)
     at async syncWhoopDataForAllUsers (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/scheduling/scheduler.js:164:3)
     at async /Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/server.js:28:3
+Incoming request: GET /api/profile
+[34mdebug[39m: Authenticating request with header {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: Extracted token {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: Token valid {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+Incoming request: GET /api/notifications
+[34mdebug[39m: Authenticating request with header {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: Extracted token {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: Token valid {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
 Incoming request: GET /api/nour-score/calculate
-[34mdebug[39m: Authenticating request with header {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: Extracted token {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: Token valid {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
+[34mdebug[39m: Authenticating request with header {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: Extracted token {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: Token valid {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
 Incoming request: GET /api/next-meal
 Request received for /api/next-meal
-[0mGET /api/next-meal [33m400[0m 1.446 ms - 36[0m
-Incoming request: GET /api/profile
-[34mdebug[39m: Authenticating request with header {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: Extracted token {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: Token valid {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-Incoming request: GET /api/notifications
-[34mdebug[39m: Authenticating request with header {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: Extracted token {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: Token valid {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: User found {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: req.user set with ID {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
+[0mGET /api/next-meal [33m400[0m 9.300 ms - 36[0m
+[34mdebug[39m: User found {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: req.user set with ID {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: User found {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: req.user set with ID {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
 Request received for calculateNourScore: User {
   dataValues: {
     id: 'abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1',
@@ -64,7 +66,7 @@ Request received for calculateNourScore: User {
     whoopAccessToken: null,
     whoopRefreshToken: null,
     whoopTokenExpires: null,
-    sessionId: '2nOn4x5tFSLdPyiRfaMI3-W9H3UyGPYx',
+    sessionId: '41YSMwvuL-WssHLsBZ_rQJ6T-5N0zJjJ',
     dietaryPreferences: null,
     feedback: null,
     overallHealthScore: null,
@@ -79,7 +81,7 @@ Request received for calculateNourScore: User {
     healthMetricsTrends: null,
     realTimeData: null,
     createdAt: 2023-07-12T13:56:00.000Z,
-    updatedAt: 2024-07-13T11:16:15.295Z
+    updatedAt: 2024-07-13T12:24:13.758Z
   },
   _previousDataValues: {
     id: 'abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1',
@@ -94,7 +96,7 @@ Request received for calculateNourScore: User {
     whoopAccessToken: null,
     whoopRefreshToken: null,
     whoopTokenExpires: null,
-    sessionId: '2nOn4x5tFSLdPyiRfaMI3-W9H3UyGPYx',
+    sessionId: '41YSMwvuL-WssHLsBZ_rQJ6T-5N0zJjJ',
     dietaryPreferences: null,
     feedback: null,
     overallHealthScore: null,
@@ -109,7 +111,7 @@ Request received for calculateNourScore: User {
     healthMetricsTrends: null,
     realTimeData: null,
     createdAt: 2023-07-12T13:56:00.000Z,
-    updatedAt: 2024-07-13T11:16:15.295Z
+    updatedAt: 2024-07-13T12:24:13.758Z
   },
   uniqno: 1,
   _changed: Set(0) {},
@@ -139,11 +141,11 @@ Request received for calculateNourScore: User {
 }
 Incoming request: GET /api/next-meal
 Request received for /api/next-meal
-[0mGET /api/next-meal [33m400[0m 0.224 ms - 36[0m
-[34mdebug[39m: User found {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: req.user set with ID {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: User found {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
-[34mdebug[39m: req.user set with ID {"service":"user-service","timestamp":"2024-07-13 12:28:17"}
+[0mGET /api/next-meal [33m400[0m 0.378 ms - 36[0m
+[34mdebug[39m: getProfile: {"_changed":{},"_options":{"_schema":null,"_schemaDelimiter":"","attributes":["id","firstName","lastName","email","password","profileImage","timeZone","notifications","whoopId","whoopAccessToken","whoopRefreshToken","whoopTokenExpires","sessionId","dietaryPreferences","feedback","overallHealthScore","healthTrend","dateOfBirth","height","weight","gender","bodyComposition","activityLevel","dietHistory","healthMetricsTrends","realTimeData","createdAt","updatedAt"],"isNewRecord":false,"raw":true},"_previousDataValues":{"activityLevel":"Very Active","bodyComposition":null,"createdAt":"2023-07-12T13:56:00.000Z","dateOfBirth":"1995-04-30T23:00:00.000Z","dietHistory":null,"dietaryPreferences":null,"email":"mitchellgcc@gmail.com","feedback":null,"firstName":"George","gender":"Male","healthMetricsTrends":null,"healthTrend":null,"height":68,"id":"abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1","lastName":"Mitchell","notifications":{},"overallHealthScore":null,"password":"$2b$10$lQOR2D1uvfvChpfTR6svsOlfJGK9eY6P6IOAB.wquZg6DkG1rfO6G","profileImage":null,"realTimeData":null,"sessionId":"41YSMwvuL-WssHLsBZ_rQJ6T-5N0zJjJ","timeZone":"GMT","updatedAt":"2024-07-13T12:24:13.758Z","weight":65,"whoopAccessToken":null,"whoopId":null,"whoopRefreshToken":null,"whoopTokenExpires":null},"dataValues":{"activityLevel":"Very Active","bodyComposition":null,"createdAt":"2023-07-12T13:56:00.000Z","dateOfBirth":"1995-04-30T23:00:00.000Z","dietHistory":null,"dietaryPreferences":null,"email":"mitchellgcc@gmail.com","feedback":null,"firstName":"George","gender":"Male","healthMetricsTrends":null,"healthTrend":null,"height":68,"id":"abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1","lastName":"Mitchell","notifications":{},"overallHealthScore":null,"password":"$2b$10$lQOR2D1uvfvChpfTR6svsOlfJGK9eY6P6IOAB.wquZg6DkG1rfO6G","profileImage":null,"realTimeData":null,"sessionId":"41YSMwvuL-WssHLsBZ_rQJ6T-5N0zJjJ","timeZone":"GMT","updatedAt":"2024-07-13T12:24:13.758Z","weight":65,"whoopAccessToken":null,"whoopId":null,"whoopRefreshToken":null,"whoopTokenExpires":null},"isNewRecord":false,"service":"user-service","timestamp":"2024-07-13 13:28:43","uniqno":1}
+[0mGET /api/profile [36m304[0m 59.075 ms - -[0m
+[34mdebug[39m: User found {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
+[34mdebug[39m: req.user set with ID {"service":"user-service","timestamp":"2024-07-13 13:28:43"}
 Fetched user data: User {
   dataValues: {
     id: 'abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1',
@@ -158,7 +160,7 @@ Fetched user data: User {
     whoopAccessToken: null,
     whoopRefreshToken: null,
     whoopTokenExpires: null,
-    sessionId: '2nOn4x5tFSLdPyiRfaMI3-W9H3UyGPYx',
+    sessionId: '41YSMwvuL-WssHLsBZ_rQJ6T-5N0zJjJ',
     dietaryPreferences: null,
     feedback: null,
     overallHealthScore: null,
@@ -173,7 +175,7 @@ Fetched user data: User {
     healthMetricsTrends: null,
     realTimeData: null,
     createdAt: 2023-07-12T13:56:00.000Z,
-    updatedAt: 2024-07-13T11:16:15.295Z
+    updatedAt: 2024-07-13T12:24:13.758Z
   },
   _previousDataValues: {
     id: 'abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1',
@@ -188,7 +190,7 @@ Fetched user data: User {
     whoopAccessToken: null,
     whoopRefreshToken: null,
     whoopTokenExpires: null,
-    sessionId: '2nOn4x5tFSLdPyiRfaMI3-W9H3UyGPYx',
+    sessionId: '41YSMwvuL-WssHLsBZ_rQJ6T-5N0zJjJ',
     dietaryPreferences: null,
     feedback: null,
     overallHealthScore: null,
@@ -203,7 +205,7 @@ Fetched user data: User {
     healthMetricsTrends: null,
     realTimeData: null,
     createdAt: 2023-07-12T13:56:00.000Z,
-    updatedAt: 2024-07-13T11:16:15.295Z
+    updatedAt: 2024-07-13T12:24:13.758Z
   },
   uniqno: 1,
   _changed: Set(0) {},
@@ -234,9 +236,8 @@ Fetched user data: User {
 Aggregating nutritional data for user: abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1 between Sat Jul 13 2024 00:00:00 GMT+0100 (British Summer Time) and Sat Jul 13 2024 23:59:59 GMT+0100 (British Summer Time)
 Incoming request: GET /api/next-meal
 Request received for /api/next-meal
-[0mGET /api/next-meal [33m400[0m 0.265 ms - 36[0m
-[34mdebug[39m: getProfile: {"_changed":{},"_options":{"_schema":null,"_schemaDelimiter":"","attributes":["id","firstName","lastName","email","password","profileImage","timeZone","notifications","whoopId","whoopAccessToken","whoopRefreshToken","whoopTokenExpires","sessionId","dietaryPreferences","feedback","overallHealthScore","healthTrend","dateOfBirth","height","weight","gender","bodyComposition","activityLevel","dietHistory","healthMetricsTrends","realTimeData","createdAt","updatedAt"],"isNewRecord":false,"raw":true},"_previousDataValues":{"activityLevel":"Very Active","bodyComposition":null,"createdAt":"2023-07-12T13:56:00.000Z","dateOfBirth":"1995-04-30T23:00:00.000Z","dietHistory":null,"dietaryPreferences":null,"email":"mitchellgcc@gmail.com","feedback":null,"firstName":"George","gender":"Male","healthMetricsTrends":null,"healthTrend":null,"height":68,"id":"abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1","lastName":"Mitchell","notifications":{},"overallHealthScore":null,"password":"$2b$10$lQOR2D1uvfvChpfTR6svsOlfJGK9eY6P6IOAB.wquZg6DkG1rfO6G","profileImage":null,"realTimeData":null,"sessionId":"2nOn4x5tFSLdPyiRfaMI3-W9H3UyGPYx","timeZone":"GMT","updatedAt":"2024-07-13T11:16:15.295Z","weight":65,"whoopAccessToken":null,"whoopId":null,"whoopRefreshToken":null,"whoopTokenExpires":null},"dataValues":{"activityLevel":"Very Active","bodyComposition":null,"createdAt":"2023-07-12T13:56:00.000Z","dateOfBirth":"1995-04-30T23:00:00.000Z","dietHistory":null,"dietaryPreferences":null,"email":"mitchellgcc@gmail.com","feedback":null,"firstName":"George","gender":"Male","healthMetricsTrends":null,"healthTrend":null,"height":68,"id":"abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1","lastName":"Mitchell","notifications":{},"overallHealthScore":null,"password":"$2b$10$lQOR2D1uvfvChpfTR6svsOlfJGK9eY6P6IOAB.wquZg6DkG1rfO6G","profileImage":null,"realTimeData":null,"sessionId":"2nOn4x5tFSLdPyiRfaMI3-W9H3UyGPYx","timeZone":"GMT","updatedAt":"2024-07-13T11:16:15.295Z","weight":65,"whoopAccessToken":null,"whoopId":null,"whoopRefreshToken":null,"whoopTokenExpires":null},"isNewRecord":false,"service":"user-service","timestamp":"2024-07-13 12:28:17","uniqno":1}
-[0mGET /api/profile [36m304[0m 16.047 ms - -[0m
+[0mGET /api/next-meal [33m400[0m 0.237 ms - 36[0m
+[0mGET /api/notifications [36m304[0m 69.873 ms - -[0m
 Found 1 meals for user abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1
 Aggregated Data: {
   totalCalories: 400,
@@ -426,15 +427,15 @@ Final Aggregated Nutritional Data: {
   },
   hydrationLevel: 200,
   mealIds: [ new ObjectId('66925963be5a69c7cf5b3291') ],
-  date: 2024-07-13T11:28:17.235Z
+  date: 2024-07-13T12:28:43.780Z
 }
 Nutritional Data to save or update: {
   userId: 'abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1',
   totalCalories: 400,
   macronutrients: { proteins: 20, carbohydrates: 50, fats: 15 },
   micronutrients: {
-    vitamins: {
-      '$__parent': '0{\n' +
+    vitamins: Map(3) {
+      '$__parent' => '0{\n' +
         '  micronutrients: {\n' +
         "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
         "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -473,11 +474,11 @@ Nutritional Data to save or update: {
         "  id: '66925963be5a69c7cf5b3292',\n" +
         '  __v: 0\n' +
         '}',
-      '$__path': '0micronutrients.vitamins',
-      '$__schemaType': '0[object Object]'
+      '$__path' => '0micronutrients.vitamins',
+      '$__schemaType' => '0[object Object]'
     },
-    minerals: {
-      '$__parent': '0{\n' +
+    minerals: Map(3) {
+      '$__parent' => '0{\n' +
         '  micronutrients: {\n' +
         "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
         "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -516,15 +517,14 @@ Nutritional Data to save or update: {
         "  id: '66925963be5a69c7cf5b3292',\n" +
         '  __v: 0\n' +
         '}',
-      '$__path': '0micronutrients.minerals',
-      '$__schemaType': '0[object Object]'
+      '$__path' => '0micronutrients.minerals',
+      '$__schemaType' => '0[object Object]'
     }
   },
   hydrationLevel: 200,
   mealIds: [ new ObjectId('66925963be5a69c7cf5b3291') ],
-  date: 2024-07-13T11:28:17.235Z
+  date: 2024-07-13T12:28:43.780Z
 }
-[0mGET /api/notifications [36m304[0m 34.912 ms - -[0m
 Updating existing nutritional data: {
   macronutrients: { proteins: 20, carbohydrates: 50, fats: 15 },
   micronutrients: { vitamins: Map(0) {}, minerals: Map(0) {} },
@@ -538,8 +538,8 @@ Updating existing nutritional data: {
   updatedAt: 2024-07-13T10:32:03.418Z,
   __v: 1
 }
-Error saving or updating nutritional data: Error: NutritionalData validation failed: micronutrients.vitamins: Cast to Map failed for value "{
-  '$__parent': '0{\n' +
+Error saving or updating nutritional data: Error: NutritionalData validation failed: micronutrients.vitamins: Cast to Map failed for value "Map(3) {
+  '$__parent' => '0{\n' +
     '  micronutrients: {\n' +
     "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
     "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -578,10 +578,10 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
     "  id: '66925963be5a69c7cf5b3292',\n" +
     '  __v: 0\n' +
     '}',
-  '$__path': '0micronutrients.vitamins',
-  '$__schemaType': '0[object Object]'
-}" (type Object) at path "micronutrients.vitamins", micronutrients.minerals: Cast to Map failed for value "{
-  '$__parent': '0{\n' +
+  '$__path' => '0micronutrients.vitamins',
+  '$__schemaType' => '0[object Object]'
+}" (type Map) at path "micronutrients.vitamins", micronutrients.minerals: Cast to Map failed for value "Map(3) {
+  '$__parent' => '0{\n' +
     '  micronutrients: {\n' +
     "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
     "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -620,9 +620,9 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
     "  id: '66925963be5a69c7cf5b3292',\n" +
     '  __v: 0\n' +
     '}',
-  '$__path': '0micronutrients.minerals',
-  '$__schemaType': '0[object Object]'
-}" (type Object) at path "micronutrients.minerals"
+  '$__path' => '0micronutrients.minerals',
+  '$__schemaType' => '0[object Object]'
+}" (type Map) at path "micronutrients.minerals"
     at ValidationError.inspect (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/error/validation.js:50:26)
     at formatValue (node:internal/util/inspect:806:19)
     at inspect (node:internal/util/inspect:365:10)
@@ -630,12 +630,12 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
     at formatWithOptions (node:internal/util/inspect:2166:10)
     at console.value (node:internal/console/constructor:358:14)
     at console.error (node:internal/console/constructor:395:61)
-    at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:155:13)
+    at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:160:13)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:14:9) {
   errors: {
-    'micronutrients.vitamins': CastError: Cast to Map failed for value "{
-      '$__parent': '0{\n' +
+    'micronutrients.vitamins': CastError: Cast to Map failed for value "Map(3) {
+      '$__parent' => '0{\n' +
         '  micronutrients: {\n' +
         "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
         "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -674,19 +674,19 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
         "  id: '66925963be5a69c7cf5b3292',\n" +
         '  __v: 0\n' +
         '}',
-      '$__path': '0micronutrients.vitamins',
-      '$__schemaType': '0[object Object]'
-    }" (type Object) at path "micronutrients.vitamins"
+      '$__path' => '0micronutrients.vitamins',
+      '$__schemaType' => '0[object Object]'
+    }" (type Map) at path "micronutrients.vitamins"
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1481:9)
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
         at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
         at Function.assign (<anonymous>)
-        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:145:14)
+        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:150:14)
         at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
         at async Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:14:9)
         at async calculateNourScore (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/NourScoreController.js:30:50) {
-      stringValue: '"{\n' +
-        "  '$__parent': '0{\\n' +\n" +
+      stringValue: '"Map(3) {\n' +
+        "  '$__parent' => '0{\\n' +\n" +
         "    '  micronutrients: {\\n' +\n" +
         `    "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\\n" +\n` +
         `    "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\\n" +\n` +
@@ -725,12 +725,12 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
         `    "  id: '66925963be5a69c7cf5b3292',\\n" +\n` +
         "    '  __v: 0\\n' +\n" +
         "    '}',\n" +
-        "  '$__path': '0micronutrients.vitamins',\n" +
-        "  '$__schemaType': '0[object Object]'\n" +
+        "  '$__path' => '0micronutrients.vitamins',\n" +
+        "  '$__schemaType' => '0[object Object]'\n" +
         '}"',
       messageFormat: undefined,
       kind: 'Map',
-      value: [Object],
+      value: [Map],
       path: 'micronutrients.vitamins',
       reason: Error: Mongoose maps do not support keys that start with "$", got "$__parent"
           at checkValidKey (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/types/map.js:344:11)
@@ -743,10 +743,10 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
           at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
           at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
           at Function.assign (<anonymous>),
-      valueType: 'Object'
+      valueType: 'Map'
     },
-    'micronutrients.minerals': CastError: Cast to Map failed for value "{
-      '$__parent': '0{\n' +
+    'micronutrients.minerals': CastError: Cast to Map failed for value "Map(3) {
+      '$__parent' => '0{\n' +
         '  micronutrients: {\n' +
         "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
         "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -785,19 +785,19 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
         "  id: '66925963be5a69c7cf5b3292',\n" +
         '  __v: 0\n' +
         '}',
-      '$__path': '0micronutrients.minerals',
-      '$__schemaType': '0[object Object]'
-    }" (type Object) at path "micronutrients.minerals"
+      '$__path' => '0micronutrients.minerals',
+      '$__schemaType' => '0[object Object]'
+    }" (type Map) at path "micronutrients.minerals"
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1481:9)
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
         at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
         at Function.assign (<anonymous>)
-        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:145:14)
+        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:150:14)
         at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
         at async Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:14:9)
         at async calculateNourScore (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/NourScoreController.js:30:50) {
-      stringValue: '"{\n' +
-        "  '$__parent': '0{\\n' +\n" +
+      stringValue: '"Map(3) {\n' +
+        "  '$__parent' => '0{\\n' +\n" +
         "    '  micronutrients: {\\n' +\n" +
         `    "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\\n" +\n` +
         `    "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\\n" +\n` +
@@ -836,12 +836,12 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
         `    "  id: '66925963be5a69c7cf5b3292',\\n" +\n` +
         "    '  __v: 0\\n' +\n" +
         "    '}',\n" +
-        "  '$__path': '0micronutrients.minerals',\n" +
-        "  '$__schemaType': '0[object Object]'\n" +
+        "  '$__path' => '0micronutrients.minerals',\n" +
+        "  '$__schemaType' => '0[object Object]'\n" +
         '}"',
       messageFormat: undefined,
       kind: 'Map',
-      value: [Object],
+      value: [Map],
       path: 'micronutrients.minerals',
       reason: Error: Mongoose maps do not support keys that start with "$", got "$__parent"
           at checkValidKey (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/types/map.js:344:11)
@@ -854,13 +854,13 @@ Error saving or updating nutritional data: Error: NutritionalData validation fai
           at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
           at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
           at Function.assign (<anonymous>),
-      valueType: 'Object'
+      valueType: 'Map'
     }
   },
   _message: 'NutritionalData validation failed'
 }
-Error calculating NourScore: Error: NutritionalData validation failed: micronutrients.vitamins: Cast to Map failed for value "{
-  '$__parent': '0{\n' +
+Error calculating NourScore: Error: NutritionalData validation failed: micronutrients.vitamins: Cast to Map failed for value "Map(3) {
+  '$__parent' => '0{\n' +
     '  micronutrients: {\n' +
     "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
     "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -899,10 +899,10 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
     "  id: '66925963be5a69c7cf5b3292',\n" +
     '  __v: 0\n' +
     '}',
-  '$__path': '0micronutrients.vitamins',
-  '$__schemaType': '0[object Object]'
-}" (type Object) at path "micronutrients.vitamins", micronutrients.minerals: Cast to Map failed for value "{
-  '$__parent': '0{\n' +
+  '$__path' => '0micronutrients.vitamins',
+  '$__schemaType' => '0[object Object]'
+}" (type Map) at path "micronutrients.vitamins", micronutrients.minerals: Cast to Map failed for value "Map(3) {
+  '$__parent' => '0{\n' +
     '  micronutrients: {\n' +
     "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
     "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -941,9 +941,9 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
     "  id: '66925963be5a69c7cf5b3292',\n" +
     '  __v: 0\n' +
     '}',
-  '$__path': '0micronutrients.minerals',
-  '$__schemaType': '0[object Object]'
-}" (type Object) at path "micronutrients.minerals"
+  '$__path' => '0micronutrients.minerals',
+  '$__schemaType' => '0[object Object]'
+}" (type Map) at path "micronutrients.minerals"
     at ValidationError.inspect (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/error/validation.js:50:26)
     at formatValue (node:internal/util/inspect:806:19)
     at inspect (node:internal/util/inspect:365:10)
@@ -951,12 +951,12 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
     at formatWithOptions (node:internal/util/inspect:2166:10)
     at console.value (node:internal/console/constructor:358:14)
     at console.error (node:internal/console/constructor:395:61)
-    at Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:71:17)
+    at Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:72:17)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async calculateNourScore (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/NourScoreController.js:30:50) {
   errors: {
-    'micronutrients.vitamins': CastError: Cast to Map failed for value "{
-      '$__parent': '0{\n' +
+    'micronutrients.vitamins': CastError: Cast to Map failed for value "Map(3) {
+      '$__parent' => '0{\n' +
         '  micronutrients: {\n' +
         "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
         "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -995,19 +995,19 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
         "  id: '66925963be5a69c7cf5b3292',\n" +
         '  __v: 0\n' +
         '}',
-      '$__path': '0micronutrients.vitamins',
-      '$__schemaType': '0[object Object]'
-    }" (type Object) at path "micronutrients.vitamins"
+      '$__path' => '0micronutrients.vitamins',
+      '$__schemaType' => '0[object Object]'
+    }" (type Map) at path "micronutrients.vitamins"
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1481:9)
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
         at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
         at Function.assign (<anonymous>)
-        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:145:14)
+        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:150:14)
         at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
         at async Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:14:9)
         at async calculateNourScore (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/NourScoreController.js:30:50) {
-      stringValue: '"{\n' +
-        "  '$__parent': '0{\\n' +\n" +
+      stringValue: '"Map(3) {\n' +
+        "  '$__parent' => '0{\\n' +\n" +
         "    '  micronutrients: {\\n' +\n" +
         `    "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\\n" +\n` +
         `    "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\\n" +\n` +
@@ -1046,12 +1046,12 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
         `    "  id: '66925963be5a69c7cf5b3292',\\n" +\n` +
         "    '  __v: 0\\n' +\n" +
         "    '}',\n" +
-        "  '$__path': '0micronutrients.vitamins',\n" +
-        "  '$__schemaType': '0[object Object]'\n" +
+        "  '$__path' => '0micronutrients.vitamins',\n" +
+        "  '$__schemaType' => '0[object Object]'\n" +
         '}"',
       messageFormat: undefined,
       kind: 'Map',
-      value: [Object],
+      value: [Map],
       path: 'micronutrients.vitamins',
       reason: Error: Mongoose maps do not support keys that start with "$", got "$__parent"
           at checkValidKey (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/types/map.js:344:11)
@@ -1064,10 +1064,10 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
           at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
           at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
           at Function.assign (<anonymous>),
-      valueType: 'Object'
+      valueType: 'Map'
     },
-    'micronutrients.minerals': CastError: Cast to Map failed for value "{
-      '$__parent': '0{\n' +
+    'micronutrients.minerals': CastError: Cast to Map failed for value "Map(3) {
+      '$__parent' => '0{\n' +
         '  micronutrients: {\n' +
         "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
         "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -1106,19 +1106,19 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
         "  id: '66925963be5a69c7cf5b3292',\n" +
         '  __v: 0\n' +
         '}',
-      '$__path': '0micronutrients.minerals',
-      '$__schemaType': '0[object Object]'
-    }" (type Object) at path "micronutrients.minerals"
+      '$__path' => '0micronutrients.minerals',
+      '$__schemaType' => '0[object Object]'
+    }" (type Map) at path "micronutrients.minerals"
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1481:9)
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
         at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
         at Function.assign (<anonymous>)
-        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:145:14)
+        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:150:14)
         at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
         at async Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:14:9)
         at async calculateNourScore (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/NourScoreController.js:30:50) {
-      stringValue: '"{\n' +
-        "  '$__parent': '0{\\n' +\n" +
+      stringValue: '"Map(3) {\n' +
+        "  '$__parent' => '0{\\n' +\n" +
         "    '  micronutrients: {\\n' +\n" +
         `    "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\\n" +\n` +
         `    "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\\n" +\n` +
@@ -1157,12 +1157,12 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
         `    "  id: '66925963be5a69c7cf5b3292',\\n" +\n` +
         "    '  __v: 0\\n' +\n" +
         "    '}',\n" +
-        "  '$__path': '0micronutrients.minerals',\n" +
-        "  '$__schemaType': '0[object Object]'\n" +
+        "  '$__path' => '0micronutrients.minerals',\n" +
+        "  '$__schemaType' => '0[object Object]'\n" +
         '}"',
       messageFormat: undefined,
       kind: 'Map',
-      value: [Object],
+      value: [Map],
       path: 'micronutrients.minerals',
       reason: Error: Mongoose maps do not support keys that start with "$", got "$__parent"
           at checkValidKey (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/types/map.js:344:11)
@@ -1175,13 +1175,13 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
           at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
           at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
           at Function.assign (<anonymous>),
-      valueType: 'Object'
+      valueType: 'Map'
     }
   },
   _message: 'NutritionalData validation failed'
 }
-Error calculating NourScore: Error: NutritionalData validation failed: micronutrients.vitamins: Cast to Map failed for value "{
-  '$__parent': '0{\n' +
+Error calculating NourScore: Error: NutritionalData validation failed: micronutrients.vitamins: Cast to Map failed for value "Map(3) {
+  '$__parent' => '0{\n' +
     '  micronutrients: {\n' +
     "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
     "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -1220,10 +1220,10 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
     "  id: '66925963be5a69c7cf5b3292',\n" +
     '  __v: 0\n' +
     '}',
-  '$__path': '0micronutrients.vitamins',
-  '$__schemaType': '0[object Object]'
-}" (type Object) at path "micronutrients.vitamins", micronutrients.minerals: Cast to Map failed for value "{
-  '$__parent': '0{\n' +
+  '$__path' => '0micronutrients.vitamins',
+  '$__schemaType' => '0[object Object]'
+}" (type Map) at path "micronutrients.vitamins", micronutrients.minerals: Cast to Map failed for value "Map(3) {
+  '$__parent' => '0{\n' +
     '  micronutrients: {\n' +
     "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
     "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -1262,9 +1262,9 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
     "  id: '66925963be5a69c7cf5b3292',\n" +
     '  __v: 0\n' +
     '}',
-  '$__path': '0micronutrients.minerals',
-  '$__schemaType': '0[object Object]'
-}" (type Object) at path "micronutrients.minerals"
+  '$__path' => '0micronutrients.minerals',
+  '$__schemaType' => '0[object Object]'
+}" (type Map) at path "micronutrients.minerals"
     at ValidationError.inspect (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/error/validation.js:50:26)
     at formatValue (node:internal/util/inspect:806:19)
     at inspect (node:internal/util/inspect:365:10)
@@ -1275,8 +1275,8 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
     at calculateNourScore (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/NourScoreController.js:40:17)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
   errors: {
-    'micronutrients.vitamins': CastError: Cast to Map failed for value "{
-      '$__parent': '0{\n' +
+    'micronutrients.vitamins': CastError: Cast to Map failed for value "Map(3) {
+      '$__parent' => '0{\n' +
         '  micronutrients: {\n' +
         "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
         "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -1315,19 +1315,19 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
         "  id: '66925963be5a69c7cf5b3292',\n" +
         '  __v: 0\n' +
         '}',
-      '$__path': '0micronutrients.vitamins',
-      '$__schemaType': '0[object Object]'
-    }" (type Object) at path "micronutrients.vitamins"
+      '$__path' => '0micronutrients.vitamins',
+      '$__schemaType' => '0[object Object]'
+    }" (type Map) at path "micronutrients.vitamins"
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1481:9)
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
         at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
         at Function.assign (<anonymous>)
-        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:145:14)
+        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:150:14)
         at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
         at async Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:14:9)
         at async calculateNourScore (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/NourScoreController.js:30:50) {
-      stringValue: '"{\n' +
-        "  '$__parent': '0{\\n' +\n" +
+      stringValue: '"Map(3) {\n' +
+        "  '$__parent' => '0{\\n' +\n" +
         "    '  micronutrients: {\\n' +\n" +
         `    "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\\n" +\n` +
         `    "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\\n" +\n` +
@@ -1366,12 +1366,12 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
         `    "  id: '66925963be5a69c7cf5b3292',\\n" +\n` +
         "    '  __v: 0\\n' +\n" +
         "    '}',\n" +
-        "  '$__path': '0micronutrients.vitamins',\n" +
-        "  '$__schemaType': '0[object Object]'\n" +
+        "  '$__path' => '0micronutrients.vitamins',\n" +
+        "  '$__schemaType' => '0[object Object]'\n" +
         '}"',
       messageFormat: undefined,
       kind: 'Map',
-      value: [Object],
+      value: [Map],
       path: 'micronutrients.vitamins',
       reason: Error: Mongoose maps do not support keys that start with "$", got "$__parent"
           at checkValidKey (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/types/map.js:344:11)
@@ -1384,10 +1384,10 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
           at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
           at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
           at Function.assign (<anonymous>),
-      valueType: 'Object'
+      valueType: 'Map'
     },
-    'micronutrients.minerals': CastError: Cast to Map failed for value "{
-      '$__parent': '0{\n' +
+    'micronutrients.minerals': CastError: Cast to Map failed for value "Map(3) {
+      '$__parent' => '0{\n' +
         '  micronutrients: {\n' +
         "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\n" +
         "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\n" +
@@ -1426,19 +1426,19 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
         "  id: '66925963be5a69c7cf5b3292',\n" +
         '  __v: 0\n' +
         '}',
-      '$__path': '0micronutrients.minerals',
-      '$__schemaType': '0[object Object]'
-    }" (type Object) at path "micronutrients.minerals"
+      '$__path' => '0micronutrients.minerals',
+      '$__schemaType' => '0[object Object]'
+    }" (type Map) at path "micronutrients.minerals"
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1481:9)
         at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
         at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
         at Function.assign (<anonymous>)
-        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:145:14)
+        at Object.saveOrUpdateNutritionalData (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/DataAggregationService.js:150:14)
         at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
         at async Object.calculateNourScoreForUser (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/NourScoreService.js:14:9)
         at async calculateNourScore (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/controllers/NourScoreController.js:30:50) {
-      stringValue: '"{\n' +
-        "  '$__parent': '0{\\n' +\n" +
+      stringValue: '"Map(3) {\n' +
+        "  '$__parent' => '0{\\n' +\n" +
         "    '  micronutrients: {\\n' +\n" +
         `    "    vitamins: Map(2) { 'A' => 200, 'C' => 15 },\\n" +\n` +
         `    "    minerals: Map(2) { 'calcium' => 100, 'iron' => 8 }\\n" +\n` +
@@ -1477,12 +1477,12 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
         `    "  id: '66925963be5a69c7cf5b3292',\\n" +\n` +
         "    '  __v: 0\\n' +\n" +
         "    '}',\n" +
-        "  '$__path': '0micronutrients.minerals',\n" +
-        "  '$__schemaType': '0[object Object]'\n" +
+        "  '$__path' => '0micronutrients.minerals',\n" +
+        "  '$__schemaType' => '0[object Object]'\n" +
         '}"',
       messageFormat: undefined,
       kind: 'Map',
-      value: [Object],
+      value: [Map],
       path: 'micronutrients.minerals',
       reason: Error: Mongoose maps do not support keys that start with "$", got "$__parent"
           at checkValidKey (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/types/map.js:344:11)
@@ -1495,27 +1495,13 @@ Error calculating NourScore: Error: NutritionalData validation failed: micronutr
           at model.$set (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/document.js:1223:14)
           at model.set [as micronutrients] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/node_modules/mongoose/lib/helpers/document/compile.js:189:13)
           at Function.assign (<anonymous>),
-      valueType: 'Object'
+      valueType: 'Map'
     }
   },
   _message: 'NutritionalData validation failed'
 }
-[0mGET /api/nour-score/calculate [31m500[0m 75.564 ms - 3449[0m
-[32minfo[39m: Running scheduled job for Whoop data sync {"service":"user-service","timestamp":"2024-07-13 12:28:20"}
-[32minfo[39m: User abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1 does not have a valid Whoop access token. {"service":"user-service","timestamp":"2024-07-13 12:28:20"}
-Processing user ID: 4495835d-8ae5-40f6-85b0-c8d2c309172b
-User not found: 4495835d-8ae5-40f6-85b0-c8d2c309172b
-Processing user ID: e7bda696-e5da-4603-b19b-2050ac70c848
-User not found: e7bda696-e5da-4603-b19b-2050ac70c848
-Processing user ID: abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1
-Fetching recommendations for user ID: abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1
+[0mGET /api/nour-score/calculate [31m500[0m 90.657 ms - 3469[0m
 MongoDB disconnected
 MongoDB disconnected
-Error in getRecommendations: Whoop data not found
-Error in deriveInsights: Error: Whoop data not found
-    at getRecommendations (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/recommendationEngine.js:21:27)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async deriveInsights (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/services/recommendationEngine.js:86:7)
-    at async Task.syncWhoopDataForAllUsers [as _execution] (/Users/georgemitchell/Library/Mobile Documents/com~apple~CloudDocs/Nour2.0/Nour2.0/backend/scheduling/scheduler.js:164:3)
 MongoDB disconnected
 PostgreSQL disconnected

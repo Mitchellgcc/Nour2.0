@@ -36,13 +36,15 @@ const calculateNourScoreForUser = async (user) => {
             activityLevel: user.activityLevel
         });
 
-        const caloricIntakeScore = calculateCaloricIntakeScore(aggregatedData.totalCalories, calculateMaintenanceCalories({
+        const maintenanceCalories = calculateMaintenanceCalories({
             weight: user.weight,
             height: user.height,
             age: age,
             gender: user.gender,
             activityLevel: user.activityLevel
-        }));
+        });
+
+        const caloricIntakeScore = calculateCaloricIntakeScore(aggregatedData.totalCalories, maintenanceCalories);
         console.log('Caloric Intake Score:', caloricIntakeScore);
 
         const macroNutrientScore = calculateMacroNutrientBalanceScore(aggregatedData.macronutrients, user.nutritionalGoals);
@@ -61,9 +63,8 @@ const calculateNourScoreForUser = async (user) => {
             nourScore: overallNourScore,
             individualMetrics: {
                 calories: caloricIntakeScore,
-                proteins: macroNutrientScore,
-                fats: macroNutrientScore,
-                carbs: macroNutrientScore,
+                macronutrients: macroNutrientScore,
+                micronutrients: microNutrientScore,
                 hydration: hydrationScore
             }
         };

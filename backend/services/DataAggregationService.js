@@ -12,7 +12,7 @@ const fetchTemperatureData = async (location) => {
   if (!apiKey) {
     throw new Error('Weather API key is missing');
   }
-  
+
   try {
     console.log(`Fetching temperature data for location: ${location}`);
     const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`);
@@ -28,15 +28,20 @@ const fetchTemperatureData = async (location) => {
 const cleanMicronutrients = (micronutrients) => {
   const allowedMicronutrients = ['vitamins', 'minerals'];
 
-  const cleanedMicronutrients = {};
+  const cleanedMicronutrients = {
+    vitamins: new Map(),
+    minerals: new Map()
+  };
 
   for (const key of allowedMicronutrients) {
     if (micronutrients[key]) {
-      cleanedMicronutrients[key] = micronutrients[key];
+      for (const [subKey, subValue] of Object.entries(micronutrients[key])) {
+        cleanedMicronutrients[key].set(subKey, subValue);
+      }
     }
   }
 
-  return micronutrients;
+  return cleanedMicronutrients;
 };
 
 const aggregateNutritionalData = async (userId) => {
