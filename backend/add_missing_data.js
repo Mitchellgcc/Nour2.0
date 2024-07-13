@@ -1,4 +1,5 @@
-// add_missing_data.js
+// backend/add_missing_data.js
+
 require('dotenv').config();
 const mongoose = require('mongoose');
 const Meal = require('./models/Meal');
@@ -16,19 +17,30 @@ mongoose.connect(process.env.MONGODB_URI, {
 async function addMissingData() {
   try {
     const userId = "abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1";
+    const mealName = "Test Meal";
+
+    // Check if the test meal already exists for the user
+    const existingMeal = await Meal.findOne({ userId: userId, name: mealName });
+    
+    if (existingMeal) {
+      console.log('Test meal already exists for this user:', existingMeal);
+      return;
+    }
+
     const currentDate = new Date('2024-07-13');
 
     // Create one meal log for testing
     const mealData = {
-      name: "Test Meal",
+      name: mealName,
       description: "Sample meal for testing",
       calories: 400,
       protein: 20,
       carbs: 50,
       fat: 15,
-      micronutrients: { A: 200, C: 15 },
-      vitamins: { A: 200, C: 15 },
-      minerals: { calcium: 100, iron: 8 },
+      micronutrients: {
+        vitamins: { A: 200, C: 15 },
+        minerals: { calcium: 100, iron: 8 }
+      },
       glycemicIndex: 45,
       glycemicLoad: 10,
       waterContent: 200,

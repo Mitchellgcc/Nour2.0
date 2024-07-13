@@ -1,3 +1,5 @@
+// backend/models/NutritionalData.js
+
 const mongoose = require('mongoose');
 
 const nutritionalDataSchema = new mongoose.Schema({
@@ -9,11 +11,11 @@ const nutritionalDataSchema = new mongoose.Schema({
     fats: { type: Number, required: true }
   },
   micronutrients: {
-    vitamins: { type: Map, of: Number, required: true },
-    minerals: { type: Map, of: Number, required: true }
+    vitamins: { type: Map, of: Number, required: true, default: {} },
+    minerals: { type: Map, of: Number, required: true, default: {} }
   },
   hydrationLevel: { type: Number, required: true },
-  mealIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Meal', required: true }], // Include mealIds
+  mealIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Meal', required: true }],
   date: { type: Date, required: true, default: Date.now }
 }, { timestamps: true });
 

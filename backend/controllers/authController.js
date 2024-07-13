@@ -1,7 +1,9 @@
+// backend/controllers/authController.js
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { Op, Sequelize } = require('sequelize');
+const logger = require('../config/logger');  // Import the logger
 
 // Generate access and refresh tokens
 const generateTokens = (user) => {
@@ -33,6 +35,7 @@ exports.register = async (req, res) => {
     const { accessToken, refreshToken } = generateTokens(user);
     res.status(201).json({ accessToken, refreshToken });
   } catch (error) {
+    logger.error('Error registering user', error);
     res.status(400).json({ message: error.message });
   }
 };
@@ -68,7 +71,7 @@ exports.login = async (req, res) => {
 
     res.status(200).json({ accessToken, refreshToken });
   } catch (error) {
-    console.error('Error logging in user:', error);
+    logger.error('Error logging in user', error);
     res.status(500).json({ message: 'Server error' });
   }
 };
@@ -77,28 +80,28 @@ exports.login = async (req, res) => {
 exports.refreshToken = async (req, res) => {
   const { token: refreshToken } = req.body;
 
-  console.log('Received refresh token request:', refreshToken);
+  logger.debug('Received refresh token request');
 
   if (!refreshToken) {
-    console.error('Refresh token missing');
+    logger.warn('Refresh token missing');
     return res.status(403).json({ message: 'Refresh token missing' });
   }
 
   jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, async (err, decoded) => {
     if (err) {
-      console.error('Invalid refresh token:', err);
+      logger.warn('Invalid refresh token', err);
       return res.status(403).json({ message: 'Invalid refresh token' });
     }
 
     const user = await User.findByPk(decoded.id);
     if (!user) {
-      console.error('User not found for decoded token id:', decoded.id);
+      logger.warn('User not found for decoded token id');
       return res.status(403).json({ message: 'User not found' });
     }
 
     const { accessToken, refreshToken: newRefreshToken } = generateTokens(user);
 
-    console.log('Generated new tokens:', { accessToken, newRefreshToken });
+    logger.debug('Generated new tokens');
 
     res.json({ accessToken, refreshToken: newRefreshToken });
   });
