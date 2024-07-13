@@ -1,9 +1,9 @@
 const cron = require('node-cron');
 const { syncWhoopData } = require('../controllers/whoopController');
 const { deriveInsights } = require('../services/recommendationEngine');
-const User = require('../models/User');
-const WhoopData = require('../models/WhoopData');
-const logger = require('../config/logger');
+const User = require('../models/User'); // Ensure User model is correctly imported
+const WhoopData = require('../models/WhoopData'); // Ensure WhoopData model is correctly imported
+const logger = require('../config/logger'); // Ensure logger is set up
 
 const normalizeData = (data) => {
   console.log(`Normalizing data:`, data);

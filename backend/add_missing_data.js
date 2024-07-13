@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 async function addMissingData() {
   try {
     const userId = "abc42412-0b4c-4e8c-ba7a-3d41c4a96ad1";
-    const currentDate = new Date('2024-07-12');
+    const currentDate = new Date('2024-07-13');
 
     // Create one meal log for testing
     const mealData = {

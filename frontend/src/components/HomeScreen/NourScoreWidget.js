@@ -87,26 +87,31 @@ const NourScoreWidget = () => {
         console.log("Starting fetchData");
         const token = localStorage.getItem('accessToken');
         console.log("Retrieved token from local storage:", token);
-    
+
         const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/nour-score/calculate`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
-    
+
         console.log("Fetch response:", response);
-    
+
         if (!response.ok) {
           console.error(`HTTP error! status: ${response.status}`);
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-    
+
+        if (response.status === 204) {
+          console.log("No content for NourScore");
+          return;
+        }
+
         const result = await response.json();
         console.log("Fetched result:", result);
-    
+
         const { nourScore, individualMetrics } = result;
-    
+
         setData({
           labels: dataTemplate.labels,
           datasets: [

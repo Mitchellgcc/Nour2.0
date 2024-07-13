@@ -1,3 +1,4 @@
+// backend/controllers/nextMealController.js
 const {
   fetchAndDisplayNewMeal,
   swipeMeal,
@@ -6,13 +7,16 @@ const {
   getMealRecommendations,
   adjustMealPlan,
   aggregateUserData,
-  fetchMealById // Ensure this is correctly imported
+  fetchMealById
 } = require('../services/nextMealService');
 const mongoose = require('mongoose');
 const logger = require('../config/logger');
 
 const getNextMeal = async (req, res) => {
   try {
+    if (!req.user) {
+      throw new Error('User not authenticated');
+    }
     const userId = req.user.id;
     logger.info(`getNextMeal called with userId: ${userId}`);
     const nextMeal = await fetchAndDisplayNewMeal(userId);
@@ -26,6 +30,9 @@ const getNextMeal = async (req, res) => {
 
 const handleSwipeMeal = async (req, res) => {
   try {
+    if (!req.user) {
+      throw new Error('User not authenticated');
+    }
     const userId = req.user.id;
     const { direction } = req.body;
     logger.info(`handleSwipeMeal called with userId: ${userId}, direction: ${direction}`);
@@ -40,6 +47,9 @@ const handleSwipeMeal = async (req, res) => {
 
 const favoriteMeal = async (req, res) => {
   try {
+    if (!req.user) {
+      throw new Error('User not authenticated');
+    }
     const userId = req.user.id;
     const { mealId } = req.body;
     logger.info(`favoriteMeal called with userId: ${userId}, mealId: ${mealId}`);
@@ -60,6 +70,9 @@ const favoriteMeal = async (req, res) => {
 
 const submitMealFeedback = async (req, res) => {
   try {
+    if (!req.user) {
+      throw new Error('User not authenticated');
+    }
     const userId = req.user.id;
     const { mealId, feedback } = req.body;
     logger.info(`submitMealFeedback called with userId: ${userId}, mealId: ${mealId}`);
@@ -80,6 +93,9 @@ const submitMealFeedback = async (req, res) => {
 
 const getRecommendations = async (req, res) => {
   try {
+    if (!req.user) {
+      throw new Error('User not authenticated');
+    }
     const userId = req.user.id;
     logger.info(`getRecommendations called with userId: ${userId}`);
     const userData = await aggregateUserData(userId);
@@ -94,6 +110,9 @@ const getRecommendations = async (req, res) => {
 
 const updateMealPlan = async (req, res) => {
   try {
+    if (!req.user) {
+      throw new Error('User not authenticated');
+    }
     const userId = req.user.id;
     const { healthData } = req.body;
     logger.info(`updateMealPlan called with userId: ${userId}, healthData: ${JSON.stringify(healthData)}`);
@@ -108,6 +127,9 @@ const updateMealPlan = async (req, res) => {
 
 const getMealById = async (req, res) => {
   try {
+    if (!req.user) {
+      throw new Error('User not authenticated');
+    }
     const { id } = req.params;
     logger.info(`getMealById called with meal ID: ${id}`);
     const meal = await fetchMealById(id);
