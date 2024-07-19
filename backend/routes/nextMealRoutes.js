@@ -4,6 +4,7 @@ const router = express.Router();
 const nextMealController = require('../controllers/nextMealController');
 const passport = require('passport');
 const logger = require('../config/logger');
+const authMiddleware = require('../middlewares/authMiddleware'); // Ensure this is imported
 
 // Log every incoming request to /api/next-meal
 router.use((req, res, next) => {
@@ -11,22 +12,8 @@ router.use((req, res, next) => {
   next();
 });
 
-// Use passport.authenticate middleware
-router.use((req, res, next) => {
-  passport.authenticate('jwt', { session: false }, (err, user, info) => {
-    if (err) {
-      console.error('Error during authentication:', err);
-      return next(err);
-    }
-    if (!user) {
-      console.error('Authentication failed:', info.message);
-      return res.status(400).json({ message: 'User not authenticated' });
-    }
-    console.log('Authentication succeeded:', user);
-    req.user = user;
-    next();
-  })(req, res, next);
-});
+// Apply authentication middleware
+router.use(authMiddleware);
 
 router.get('/', (req, res, next) => {
   console.log('Authenticated User:', req.user); // Add this line to debug

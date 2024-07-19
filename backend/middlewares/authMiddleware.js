@@ -22,7 +22,7 @@ const authMiddleware = async (req, res, next) => {
   }
 
   const token = authHeader.replace('Bearer ', '');
-  logger.debug('Extracted token');
+  logger.debug('Extracted token:', token);
 
   if (!token) {
       logger.warn('No token provided');
@@ -31,7 +31,7 @@ const authMiddleware = async (req, res, next) => {
 
   try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      logger.debug('Token valid');
+      logger.debug('Token valid, decoded payload:', decoded);
 
       if (!decoded.id || !isUuid(decoded.id)) {
           logger.warn('Decoded token is missing user ID or ID is not valid UUID');
@@ -44,7 +44,7 @@ const authMiddleware = async (req, res, next) => {
           logger.warn('User not found for ID');
           return res.status(404).json({ message: 'User not found' });
       }
-      logger.debug('User found');
+      logger.debug('User found:', user);
 
       if (user.whoopTokenExpires && user.whoopTokenExpires < new Date()) {
           logger.debug('Whoop token expired, refreshing token');
@@ -53,7 +53,7 @@ const authMiddleware = async (req, res, next) => {
 
       req.user = user;
       req.user.id = user.id;
-      logger.debug('req.user set with ID');
+      logger.debug('req.user set with ID:', req.user.id);
 
       next();
   } catch (error) {
@@ -61,7 +61,7 @@ const authMiddleware = async (req, res, next) => {
       if (error.name === 'TokenExpiredError' && refreshToken) {
           try {
               const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-              logger.debug('Refresh token decoded');
+              logger.debug('Refresh token decoded:', decoded);
               const userId = decoded.id.toString();
               const user = await User.findByPk(userId);
               if (!user) {
